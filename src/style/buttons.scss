@@ -1,0 +1,73 @@
+@import "./colors.scss";
+@import "./fonts.scss";
+
+$button-brightness: 100%;
+$color-blue: #007bff;
+$color-disabled: #e9ecef;
+$color-red: #cb3656;
+
+button:hover {
+  cursor: pointer;
+}
+
+@mixin button-props {
+  position: relative;
+  user-select: none;
+  height: 29px;
+  border: 0px;
+  transition: 0.3s ease-in-out;
+  background: none;
+  z-index: 2;
+  font-weight: normal;
+  text-align: center;
+  font-size: 11.5px;
+  line-height: 13px;
+}
+
+@mixin button-background($color) {
+  &::before {
+    content: " ";
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: $color;
+    z-index: -1;
+    border-radius: 4px;
+    transition: 0.2s ease-in-out;
+  }
+
+  &:hover::before {
+    filter: brightness($button-brightness - 10%);
+  }
+
+  &:focus::before {
+    filter: brightness($button-brightness - 10%);
+  }
+
+  &:active::before {
+    filter: brightness($button-brightness - 20%);
+  }
+}
+
+.button-default {
+  @include button-props;
+  color: $white;
+  @include button-background($color-blue);
+  border-radius: 8px;
+}
+
+.button-disabled {
+  @include button-props;
+  color: $white;
+  @include button-background($color-disabled);
+  border-radius: 8px;
+}
+
+.button-alert {
+  @include button-props;
+  color: $white;
+  @include button-background($color-red);
+  border-radius: 8px;
+}
