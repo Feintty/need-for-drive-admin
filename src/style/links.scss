@@ -1,0 +1,16 @@
+@import "./colors.scss";
+@import "./fonts.scss";
+
+.link-default{
+    color:$blue;
+    cursor: pointer;
+    user-select: none;
+
+    &:checked{
+        color:$blue;
+    }
+
+    &:hover{
+        filter:brightness(110%)
+    }
+}
