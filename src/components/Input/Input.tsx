@@ -7,17 +7,23 @@ interface IInputProps {
   type: "text" | "password";
 }
 
-const Input = ({ description, placeholder, type }: IInputProps) => {
+const Input: React.FC<IInputProps> = ({ description, placeholder, type }) => {
   return (
     <div className="input-default">
       {description && (
-        <h3 className="input-default__description">{description}</h3>
+        <label
+          htmlFor={`input-${description}`}
+          className="input-default__description"
+        >
+          {description}
+        </label>
       )}
       <input
+        id={`input-${description}`}
         className="input-default__input"
         type={type}
         placeholder={placeholder}
-      ></input>
+      />
     </div>
   );
 };

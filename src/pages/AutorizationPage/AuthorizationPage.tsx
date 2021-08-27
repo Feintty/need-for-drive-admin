@@ -7,26 +7,28 @@ const classNames = require("classnames");
 const buttonClass = classNames("authorization__login", "button-default");
 const linkClass = classNames("authorization__access", "link-default");
 
-const AuthorizationPage = () => {
+const AuthorizationPage: React.FC = () => {
   return (
     <div className="authorization">
       <div className="authorization__logo">
         <img src={Logo} alt="logo" className="authorization__img" />
-        <h2 className="authorization__description">Need for drive</h2>
+        <h1 className="authorization__description">Need for drive</h1>
       </div>
       <div className="authorization__content">
         <h3 className="authorization__heading">Вход</h3>
-        <div className="authorization__inputs">
+        <form className="authorization__inputs">
           <Input description="Почта" placeholder="Введите почту" type="text" />
           <Input
             description="Пароль"
             placeholder="Введите пароль"
             type="password"
           />
-        </div>
+        </form>
         <div className="authorization__actions">
           <a className={linkClass}>Запросить доступ</a>
-          <button className={buttonClass}>Войти</button>
+          <button type="submit" className={buttonClass}>
+            Войти
+          </button>
         </div>
       </div>
     </div>
