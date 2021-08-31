@@ -14,23 +14,23 @@ const AuthorizationPage: React.FC = () => {
         <img src={Logo} alt="logo" className="authorization__img" />
         <h1 className="authorization__description">Need for drive</h1>
       </div>
-      <div className="authorization__content">
+      <form className="authorization__content">
         <h3 className="authorization__heading">Вход</h3>
-        <form className="authorization__inputs">
+        <div className="authorization__inputs">
           <Input description="Почта" placeholder="Введите почту" type="text" />
           <Input
             description="Пароль"
             placeholder="Введите пароль"
             type="password"
           />
-        </form>
+        </div>
         <div className="authorization__actions">
           <a className={linkClass}>Запросить доступ</a>
           <button type="submit" className={buttonClass}>
             Войти
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
