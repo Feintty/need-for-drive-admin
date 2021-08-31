@@ -1,0 +1,32 @@
+@import "../../style/local.scss";
+
+.input-default {
+  @include flex-column;
+
+  &__description {
+    margin-bottom: 8.5px;
+    font-weight: normal;
+    font-size: 10.5px;
+    line-height: 12px;
+    letter-spacing: -0.18421px;
+    color:$text-color-alt;
+  }
+
+  &__input {
+    border: none;
+    background:$white;
+    border: 1px solid $gray-dark;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 13px;
+    padding: 8px 11.5px;
+    color: $text-color;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

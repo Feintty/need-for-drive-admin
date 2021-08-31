@@ -1,0 +1,12 @@
+@import "./colors.scss";
+@import "./normalize.scss";
+@import "./fonts.scss";
+@import "./buttons.scss";
+@import "./links.scss";
+
+* {
+  font-family: ROBOTO;
+}
+body{
+  background-color: $main-bg;
+}
