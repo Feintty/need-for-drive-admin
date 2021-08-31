@@ -1,13 +1,24 @@
 import React from "react";
 import Logo from "../../assets/icons/logo.svg";
 import Input from "../../components/Input/Input";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import {
+  setMail,
+  setPassword,
+} from "../../store/Authorization/AuthorizationActionCreators";
 import "./AuthorizationPage.scss";
 
 const classNames = require("classnames");
-const buttonClass = classNames("authorization__login", "button-default");
-const linkClass = classNames("authorization__access", "link-default");
 
 const AuthorizationPage: React.FC = () => {
+  const { mail, password } = useTypedSelector((state) => state.auth);
+
+  const buttonClass = classNames(
+    "authorization__login",
+    mail.isCorrect && password.isCorrect ? "button-default" : "button-disabled"
+  );
+  const linkClass = classNames("authorization__access", "link-default");
+
   return (
     <div className="authorization">
       <div className="authorization__logo">
@@ -17,11 +28,19 @@ const AuthorizationPage: React.FC = () => {
       <form className="authorization__content">
         <h3 className="authorization__heading">Вход</h3>
         <div className="authorization__inputs">
-          <Input description="Почта" placeholder="Введите почту" type="text" />
+          <Input
+            description="Почта"
+            placeholder="Введите почту"
+            type="text"
+            setter={setMail}
+            isCorrect={mail.isCorrect}
+          />
           <Input
             description="Пароль"
             placeholder="Введите пароль"
             type="password"
+            setter={setPassword}
+            isCorrect={password.isCorrect}
           />
         </div>
         <div className="authorization__actions">

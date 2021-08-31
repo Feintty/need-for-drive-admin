@@ -1,4 +1,5 @@
-enum AuthorizationActions {
-  LOGIN = "LOGIN",
+export enum AuthorizationActions {
+  AUTHORIZATION_LOGIN = "AUTHORIZATION_LOGIN",
+  AUTHORIZATION_CHANGE_MAIL = "AUTHORIZATION_CHANGE_MAIL",
+  AUTHORIZATION_CHANGE_PASSWORD = "AUTHORIZATION_CHANGE_PASSWORD",
 }
-export default AuthorizationActions;

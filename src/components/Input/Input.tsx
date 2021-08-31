@@ -1,13 +1,35 @@
+import classNames from "classnames";
 import React from "react";
+import { useDispatch } from "react-redux";
 import "./Input.scss";
 
 interface IInputProps {
   description?: string;
   placeholder?: string;
   type: "text" | "password";
+  setter?: (arg0: string) => void;
+  isCorrect: boolean;
 }
 
-const Input: React.FC<IInputProps> = ({ description, placeholder, type }) => {
+const Input: React.FC<IInputProps> = ({
+  description,
+  placeholder,
+  type,
+  setter,
+  isCorrect,
+}) => {
+  const dispatch = useDispatch();
+  const inputClass = classNames("input-default__input", {
+    incorrect: !isCorrect,
+  });
+
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (setter) {
+      console.log(e.target.value);
+      dispatch(setter(e.target.value));
+    }
+  };
+
   return (
     <div className="input-default">
       {description && (
@@ -20,9 +42,10 @@ const Input: React.FC<IInputProps> = ({ description, placeholder, type }) => {
       )}
       <input
         id={`input-${description}`}
-        className="input-default__input"
+        className={inputClass}
         type={type}
         placeholder={placeholder}
+        onChange={onInputChange}
       />
     </div>
   );
