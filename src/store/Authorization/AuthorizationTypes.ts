@@ -1,6 +1,6 @@
 import { AuthorizationActions } from "./AutorizationActions";
 
-export interface IInitialUser {
+export interface IInitialAuthorization {
   mail: {
     value: string;
     isCorrect: boolean;
@@ -9,20 +9,6 @@ export interface IInitialUser {
     value: string;
     isCorrect: boolean;
   };
-  loggedData: null | string | ILoggedData;
-}
-
-export interface ILoggedData {
-  token_type: string;
-  access_token: string;
-  expires_in: number;
-  refresh_token: string;
-  user_id: string;
-}
-
-export interface IAuthorizationLogin {
-  type: AuthorizationActions.AUTHORIZATION_LOGIN;
-  payload: { loggedData: ILoggedData | string };
 }
 
 export interface IAuthorizationChangeMail {
@@ -36,6 +22,5 @@ export interface IAuthorizationChangePassword {
 }
 
 export type AuthorizationAction =
-  | IAuthorizationLogin
   | IAuthorizationChangeMail
   | IAuthorizationChangePassword;

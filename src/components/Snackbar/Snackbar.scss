@@ -1,0 +1,85 @@
+@import "../../style/local.scss";
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+    padding:0 27px;
+  }
+  10% {
+    opacity: 1;
+    padding: 13px 27px;
+  }
+  90% {
+    opacity: 1;
+    padding: 13px 27px;
+  }
+  100% {
+    opacity: 0;
+    padding: 0 27px;
+  }
+}
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+      padding:0 27px;
+    }
+    10% {
+      opacity: 1;
+      padding: 13px 27px;
+    }
+  }
+
+.snackbar {
+    @include flex-row;
+    align-items: center;
+  left: 0;
+  top: 0;
+  position: absolute;
+  transition: 0.5s linear;
+  width: 100%;
+  z-index: 3;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: -0.325px;
+  color: $white;
+  padding: 13px 27px;
+  animation: fade;
+
+  &__img{
+      height: 12px;
+      margin-right: 9px;
+  }
+
+  &__close{
+      background: none;
+      outline: none;
+      border:none;
+      img{
+          height:16px;
+      }
+      margin-left: auto;
+  }
+}
+
+.error {
+  background: $color-red;
+}
+
+.success {
+  background: $main-accent;
+}
+
+.warning { 
+    background: $color-warning;
+}
+
+.closable{
+    animation: fadeIn;
+}
+
+.non-closable{
+    animation: fade;
+}

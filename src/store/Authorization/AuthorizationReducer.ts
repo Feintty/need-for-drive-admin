@@ -1,7 +1,10 @@
-import { AuthorizationAction, IInitialUser } from "./AuthorizationTypes";
+import {
+  AuthorizationAction,
+  IInitialAuthorization,
+} from "./AuthorizationTypes";
 import { AuthorizationActions } from "./AutorizationActions";
 
-const initialUser: IInitialUser = {
+const initialUser: IInitialAuthorization = {
   mail: {
     value: "",
     isCorrect: false,
@@ -10,16 +13,13 @@ const initialUser: IInitialUser = {
     value: "",
     isCorrect: false,
   },
-  loggedData: null,
 };
 
 const AuthorizationReducer = (
   state = initialUser,
   action: AuthorizationAction
-): IInitialUser => {
+): IInitialAuthorization => {
   switch (action.type) {
-    case AuthorizationActions.AUTHORIZATION_LOGIN:
-      return { ...state, ...action.payload };
     case AuthorizationActions.AUTHORIZATION_CHANGE_MAIL:
       return { ...state, ...action.payload };
     case AuthorizationActions.AUTHORIZATION_CHANGE_PASSWORD:

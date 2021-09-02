@@ -27,7 +27,8 @@
     "@typescript-eslint/comma-dangle": "off",
     "@typescript-eslint/indent": "off",
     "no-param-reassign": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "@typescript-eslint/no-unused-vars":"off"
   },
   "ignorePatterns": ["lighthouse/**", "build/**"],
   "root": true
