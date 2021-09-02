@@ -9,12 +9,12 @@ export const login = (mail: string, password: string) => {
     await dispatch({ type: UserActions.USER_DEFAULT });
     try {
       const response = await axios({
-        baseURL: "https://api-factory.simbirsoft1.com/api/auth/login",
+        baseURL: `${process.env.REACT_APP_API_URL}/auth/login`,
         method: "POST",
         headers: {
-          "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
-          Authorization: "Basic MTJoN2MyZjo0Y2JjZWE5NmRl",
-          "Content-Type": "application/json",
+          "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
+          Authorization: process.env.REACT_APP_AUTHORIZATION_KEY,
+          "Content-Type": process.env.REACT_APP_CONTENT_TYPE,
         },
         data: {
           username: mail,
