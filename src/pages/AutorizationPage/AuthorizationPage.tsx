@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import Logo from "../../assets/icons/logo.svg";
 import Input from "../../components/Input/Input";
-import Snackbar from "../../components/Snackbar/Snackbar";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import {
   setMail,
@@ -17,7 +16,6 @@ const classNames = require("classnames");
 const AuthorizationPage: React.FC = () => {
   const dispatch = useDispatch();
   const { mail, password } = useTypedSelector((state) => state.auth);
-  const { isLogged, error, isLoaded } = useTypedSelector((state) => state.user);
   const { isOpened } = useTypedSelector((state) => state.snackbar);
 
   const buttonClass = classNames(
@@ -28,15 +26,7 @@ const AuthorizationPage: React.FC = () => {
   const onLoginClick = (): void => {
     dispatch(login(mail.value, password.value));
     if (!isOpened) {
-      dispatch(snackbarOpen());
-    }
-  };
-
-  const snackbars = () => {
-    if (error) {
-      return <Snackbar type="error" message="Пользователь не найден!" />;
-    } else if (isLogged) {
-      return <Snackbar type="success" message="Вы успешно вошли!" />;
+      dispatch(snackbarOpen("snackbar-main"));
     }
   };
 
@@ -44,7 +34,6 @@ const AuthorizationPage: React.FC = () => {
 
   return (
     <div className="authorization">
-      {snackbars()}
       <div className="authorization__wrapper">
         <div className="authorization__logo">
           <img src={Logo} alt="logo" className="authorization__img" />

@@ -25,7 +25,6 @@ const Input: React.FC<IInputProps> = ({
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (setter) {
-      console.log(e.target.value);
       dispatch(setter(e.target.value));
     }
   };

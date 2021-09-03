@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Snackbar.scss";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useDispatch } from "react-redux";
@@ -15,6 +15,7 @@ interface ISnackbarProps {
   message: string;
   closable?: boolean;
   delay?: number;
+  snackbarId: string;
 }
 
 const Snackbar: React.FC<ISnackbarProps> = ({
@@ -22,9 +23,10 @@ const Snackbar: React.FC<ISnackbarProps> = ({
   message,
   closable,
   delay = 3000,
+  snackbarId,
 }) => {
   const dispatch = useDispatch();
-  const { isOpened } = useTypedSelector((state) => state.snackbar);
+  const { isOpened, id } = useTypedSelector((state) => state.snackbar);
   const snackbarClassname = classNames({
     snackbar: true,
     error: type === "error",
@@ -35,10 +37,6 @@ const Snackbar: React.FC<ISnackbarProps> = ({
   });
 
   let index = 1;
-
-  useEffect(() => {
-    console.log(isOpened);
-  }, [isOpened]);
 
   const getImageByType = () => {
     if (type === "error") {
@@ -53,14 +51,14 @@ const Snackbar: React.FC<ISnackbarProps> = ({
   };
 
   const onCloseClick = () => {
-    dispatch(snackbarClose());
+    dispatch(snackbarClose(snackbarId));
   };
 
-  if (isOpened) {
+  if (isOpened && snackbarId === id) {
     if (!closable) {
       return (
         <div
-          onAnimationEnd={() => dispatch(snackbarClose())}
+          onAnimationEnd={() => dispatch(snackbarClose(snackbarId))}
           className={snackbarClassname}
           style={{ animationDuration: `${delay}ms`, zIndex: index++ }}
         >
