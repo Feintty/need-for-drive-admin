@@ -22,7 +22,7 @@
   "rules": {
     "prettier/prettier": "error",
     "import/prefer-default-export": "off",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "off",
     "no-underscore-dangle": "off",
     "@typescript-eslint/comma-dangle": "off",
     "@typescript-eslint/indent": "off",

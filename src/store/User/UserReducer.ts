@@ -22,7 +22,7 @@ const UserReducer = (state = initialUser, action: UserAction): IInitialUser => {
     case UserActions.USER_LOGIN_ERROR:
       return {
         ...state,
-        error: "Пользователь не найден",
+        error: action.payload.error,
         isLogged: false,
         isLoaded: true,
       };

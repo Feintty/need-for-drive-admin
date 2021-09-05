@@ -36,17 +36,16 @@ const Snackbar: React.FC<ISnackbarProps> = ({
     "non-closable": !closable,
   });
 
-  let index = 1;
+  let zIndex = 1;
 
   const getImageByType = () => {
-    if (type === "error") {
-      return Error;
-    }
-    if (type === "success") {
-      return Success;
-    }
-    if (type === "warning") {
-      return Warning;
+    switch (type) {
+      case "error":
+        return Error;
+      case "success":
+        return Success;
+      case "warning":
+        return Warning;
     }
   };
 
@@ -55,29 +54,19 @@ const Snackbar: React.FC<ISnackbarProps> = ({
   };
 
   if (isOpened && snackbarId === id) {
-    if (!closable) {
-      return (
-        <div
-          onAnimationEnd={() => dispatch(snackbarClose(snackbarId))}
-          className={snackbarClassname}
-          style={{ animationDuration: `${delay}ms`, zIndex: index++ }}
-        >
-          <img className="snackbar__img" src={getImageByType()} />
-          <div className="snackbar__message">{message}</div>
-        </div>
-      );
-    } else {
-      return (
-        <div
-          className={snackbarClassname}
-          style={{ animationDuration: `${delay}ms`, zIndex: index++ }}
-        >
-          <img
-            alt="snackbarMark"
-            className="snackbar__img"
-            src={getImageByType()}
-          />
-          <div className="snackbar__message">{message}</div>
+    return (
+      <div
+        onAnimationEnd={() => !closable && dispatch(snackbarClose(snackbarId))}
+        className={snackbarClassname}
+        style={{ animationDuration: `${delay}ms`, zIndex: zIndex++ }}
+      >
+        <img
+          alt="snackbarMark"
+          className="snackbar__img"
+          src={getImageByType()}
+        />
+        <div className="snackbar__message">{message}</div>
+        {closable && (
           <button
             type="button"
             onClick={onCloseClick}
@@ -85,9 +74,9 @@ const Snackbar: React.FC<ISnackbarProps> = ({
           >
             <img alt="close" src={Close} />
           </button>
-        </div>
-      );
-    }
+        )}
+      </div>
+    );
   }
   return null;
 };

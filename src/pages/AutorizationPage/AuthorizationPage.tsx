@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Logo from "../../assets/icons/logo.svg";
 import Input from "../../components/Input/Input";
@@ -23,14 +23,17 @@ const AuthorizationPage: React.FC = () => {
     mail.isCorrect && password.isCorrect ? "button-default" : "button-disabled"
   );
 
+  useEffect(() => {
+    dispatch(setMail(""));
+    dispatch(setPassword(""));
+  }, []);
+
   const onLoginClick = (): void => {
     dispatch(login(mail.value, password.value));
     if (!isOpened) {
       dispatch(snackbarOpen("snackbar-main"));
     }
   };
-
-  const linkClass = classNames("authorization__access", "link-default");
 
   return (
     <div className="authorization">
@@ -58,7 +61,9 @@ const AuthorizationPage: React.FC = () => {
             />
           </div>
           <div className="authorization__actions">
-            <a className={linkClass}>Запросить доступ</a>
+            <a className="authorization__access link-default">
+              Запросить доступ
+            </a>
             <button
               onClick={onLoginClick}
               type="button"

@@ -1,14 +1,13 @@
 import { AuthorizationActions } from "./AutorizationActions";
 
+interface IInitialAuthorizationElement {
+  value: string;
+  isCorrect: boolean;
+}
+
 export interface IInitialAuthorization {
-  mail: {
-    value: string;
-    isCorrect: boolean;
-  };
-  password: {
-    value: string;
-    isCorrect: boolean;
-  };
+  mail: IInitialAuthorizationElement;
+  password: IInitialAuthorizationElement;
 }
 
 export interface IAuthorizationChangeMail {

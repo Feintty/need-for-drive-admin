@@ -1,17 +1,19 @@
 import React from "react";
 import Snackbar from "./components/Snackbar/Snackbar";
+import snackbarError from "./components/Snackbar/SnackbarErrors";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import Routes from "./Routes";
 
 const App = () => {
   const { isLogged, error } = useTypedSelector((state) => state.user);
+
   const snackbars = () => {
     if (error) {
       return (
         <Snackbar
           snackbarId="snackbar-main"
           type="error"
-          message="Пользователь не найден!"
+          message={snackbarError(error)}
         />
       );
     } else if (isLogged) {

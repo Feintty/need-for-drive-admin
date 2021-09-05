@@ -14,30 +14,22 @@ const Routes = () => {
     }
   }, []);
 
-  const unauthorizedRoutes = (
+  return (
     <Switch>
+      <Redirect
+        from={isLogged ? "/auth" : "/admin/*"}
+        to={isLogged ? "/admin/orders" : "/auth"}
+      />
       <Route path="/auth">
         <AuthorizationPage />
       </Route>
-      <Redirect to="/auth" />
-    </Switch>
-  );
-
-  const authorizedRoutes = (
-    <Switch>
       <Route path="/admin/orders">
         <div>Вы уже авторизованы</div>
         <button onClick={() => dispatch(exitUser())}>Выйти</button>
       </Route>
-      <Redirect to="/admin/orders" />
+      <Redirect from="/" to="/auth" />
     </Switch>
   );
-
-  if (isLogged) {
-    return authorizedRoutes;
-  } else {
-    return unauthorizedRoutes;
-  }
 };
 
 export default Routes;

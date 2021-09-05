@@ -15,6 +15,9 @@ export interface IUserLoginSucces {
 
 export interface IUserLoginError {
   type: UserActions.USER_LOGIN_ERROR;
+  payload: {
+    error: string;
+  };
 }
 
 export interface IUserDefault {
