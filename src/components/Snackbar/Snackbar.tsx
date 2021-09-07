@@ -48,31 +48,29 @@ const Snackbar: React.FC<ISnackbarProps> = ({ snackbarId }) => {
   if (isOpened && snackbarId === id) {
     return null;
   }
-    return (
-      <div
-        onAnimationEnd={() => !closable && dispatch(snackbarClose(snackbarId))}
-        className={snackbarClassname}
-        style={{ animationDuration: `${delay}ms`, zIndex: zIndex++ }}
-      >
-        <img
-          alt="snackbarMark"
-          className="snackbar__img"
-          src={getImageByType()}
-        />
-        <div className="snackbar__message">{message}</div>
-        {closable && (
-          <button
-            type="button"
-            onClick={onCloseClick}
-            className="snackbar__close"
-          >
-            <img alt="close" src={Close} />
-          </button>
-        )}
-      </div>
-    );
-  }
-
+  return (
+    <div
+      onAnimationEnd={() => !closable && dispatch(snackbarClose(snackbarId))}
+      className={snackbarClassname}
+      style={{ animationDuration: `${delay}ms`, zIndex: zIndex++ }}
+    >
+      <img
+        alt="snackbarMark"
+        className="snackbar__img"
+        src={getImageByType()}
+      />
+      <div className="snackbar__message">{message}</div>
+      {closable && (
+        <button
+          type="button"
+          onClick={onCloseClick}
+          className="snackbar__close"
+        >
+          <img alt="close" src={Close} />
+        </button>
+      )}
+    </div>
+  );
 };
 
 export default Snackbar;
