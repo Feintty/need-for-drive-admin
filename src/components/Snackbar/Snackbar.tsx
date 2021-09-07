@@ -45,7 +45,7 @@ const Snackbar: React.FC<ISnackbarProps> = ({ snackbarId }) => {
     dispatch(snackbarClose(snackbarId));
   };
 
-  if (isOpened && snackbarId === id) {
+  if (!(isOpened && snackbarId === id)) {
     return null;
   }
   return (
