@@ -46,6 +46,8 @@ const Snackbar: React.FC<ISnackbarProps> = ({ snackbarId }) => {
   };
 
   if (isOpened && snackbarId === id) {
+    return null;
+  }
     return (
       <div
         onAnimationEnd={() => !closable && dispatch(snackbarClose(snackbarId))}
@@ -70,7 +72,7 @@ const Snackbar: React.FC<ISnackbarProps> = ({ snackbarId }) => {
       </div>
     );
   }
-  return null;
+
 };
 
 export default Snackbar;
