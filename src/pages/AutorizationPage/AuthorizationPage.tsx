@@ -7,7 +7,6 @@ import {
   setMail,
   setPassword,
 } from "../../store/Authorization/AuthorizationActionCreators";
-import { snackbarOpen } from "../../store/Snackbar/SnackbarActionCreators";
 import { login } from "../../store/User/UserActionCreators";
 import "./AuthorizationPage.scss";
 
@@ -16,7 +15,6 @@ const classNames = require("classnames");
 const AuthorizationPage: React.FC = () => {
   const dispatch = useDispatch();
   const { mail, password } = useTypedSelector((state) => state.auth);
-  const { isOpened } = useTypedSelector((state) => state.snackbar);
 
   const buttonClass = classNames(
     "authorization__login",
@@ -30,9 +28,6 @@ const AuthorizationPage: React.FC = () => {
 
   const onLoginClick = (): void => {
     dispatch(login(mail.value, password.value));
-    if (!isOpened) {
-      dispatch(snackbarOpen("snackbar-main"));
-    }
   };
 
   return (

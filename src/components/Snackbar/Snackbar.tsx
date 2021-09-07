@@ -11,22 +11,14 @@ import Close from "../../assets/icons/close.svg";
 const classNames = require("classnames");
 
 interface ISnackbarProps {
-  type: "error" | "success" | "warning";
-  message: string;
-  closable?: boolean;
-  delay?: number;
   snackbarId: string;
 }
 
-const Snackbar: React.FC<ISnackbarProps> = ({
-  type,
-  message,
-  closable,
-  delay = 3000,
-  snackbarId,
-}) => {
+const Snackbar: React.FC<ISnackbarProps> = ({ snackbarId }) => {
   const dispatch = useDispatch();
-  const { isOpened, id } = useTypedSelector((state) => state.snackbar);
+  const { isOpened, id, type, message, closable, delay } = useTypedSelector(
+    (state) => state.snackbar
+  );
   const snackbarClassname = classNames({
     snackbar: true,
     error: type === "error",
