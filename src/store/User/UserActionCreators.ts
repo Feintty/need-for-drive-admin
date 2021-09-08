@@ -3,9 +3,11 @@ import { UserAction } from "./UserTypes";
 import { UserActions } from "./UserActions";
 import cookies from "react-cookies";
 import axios from "axios";
+import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
+import errorCodeToMessage from "../../utils/errorCodeToMessage";
 
 export const login = (mail: string, password: string) => {
-  return async (dispatch: Dispatch<UserAction>) => {
+  return async (dispatch: Dispatch<any>) => {
     await dispatch({ type: UserActions.USER_DEFAULT });
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/auth/login/`,
@@ -20,6 +22,7 @@ export const login = (mail: string, password: string) => {
       },
     })
       .then((response) => {
+        dispatch(snackbarOpen("snackbar-main", "Вы успешно вошли", "success"));
         cookies.save(
           "userData",
           {
@@ -37,11 +40,17 @@ export const login = (mail: string, password: string) => {
         });
       })
       .catch((error) => {
-        console.log(JSON.stringify(error.response));
         dispatch({
           type: UserActions.USER_LOGIN_ERROR,
           payload: { error: error.response.status.toString() },
         });
+        dispatch(
+          snackbarOpen(
+            "snackbar-main",
+            errorCodeToMessage(error.response.status.toString()),
+            "error"
+          )
+        );
       });
   };
 };

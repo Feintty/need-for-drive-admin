@@ -28,7 +28,7 @@ const Snackbar: React.FC<ISnackbarProps> = ({ snackbarId }) => {
     "non-closable": !closable,
   });
 
-  let zIndex = 1;
+  let zIndex = 10;
 
   const getImageByType = () => {
     switch (type) {
