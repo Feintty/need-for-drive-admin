@@ -1,0 +1,14 @@
+@import "../../style/local.scss";
+
+.admin-page {
+  @include flex-row;
+  width: 100%;
+  &__content {
+    @include flex-column;
+    width: 100%;
+  }
+  &__tab{
+    padding: 28px;
+    flex-grow: 1;
+  }
+}

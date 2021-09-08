@@ -1,0 +1,24 @@
+@import "../../style/local.scss";
+
+.orders-tab {
+  height: 100%;
+
+  &__name {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 29px;
+    line-height: 33px;
+    letter-spacing: -0.725px;
+    color:$text-color;
+    margin-bottom: 30px;
+  }
+
+  &__content {
+    box-shadow: 0px 1px 0px rgba(90, 97, 105, 0.11),
+      0px 2px 4px rgba(90, 97, 105, 0.12), 0px 5px 5px rgba(90, 97, 105, 0.06),
+      0px 3.5px 35px rgba(90, 97, 105, 0.1);
+    border-radius: 9px;
+    background: $white;
+    padding: 14px 21px;
+  }
+}

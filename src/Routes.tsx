@@ -3,7 +3,9 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import AuthorizationPage from "./pages/AutorizationPage/AuthorizationPage";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "./hooks/useTypedSelector";
-import { checkIsUserExists, exitUser } from "./store/User/UserActionCreators";
+import { checkIsUserExists } from "./store/User/UserActionCreators";
+import AdminPage from "./pages/AdminPage/AdminPage";
+import OrdersTab from "./components/OrdersTab/OrdersTab";
 
 const Routes = () => {
   const { isLogged } = useTypedSelector((state) => state.user);
@@ -23,10 +25,12 @@ const Routes = () => {
       <Route path="/auth">
         <AuthorizationPage />
       </Route>
-      <Route path="/admin/orders">
-        <div>Вы уже авторизованы</div>
-        <button onClick={() => dispatch(exitUser())}>Выйти</button>
-      </Route>
+      <AdminPage>
+        <Route path={`/admin/orders`} exact>
+          <OrdersTab />
+        </Route>
+        <Route path={`/admin/cars`}>Автомобили</Route>
+      </AdminPage>
       <Redirect from="/" to="/auth" />
     </Switch>
   );

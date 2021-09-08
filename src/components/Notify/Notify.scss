@@ -1,0 +1,31 @@
+@import "../../style/local.scss";
+.notify {
+  @include flex-row-center;
+  width: 69px;
+  border-left: 2px solid $main-bg;
+  position: relative;
+  transition: 0.5s ease-in-out;
+
+  &__counter {
+    position: absolute;
+    top: 35px;
+    left: 35px;
+    @include flex-column-center;
+    width: 14px;
+    height: 14px;
+    background: $color-red;
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 9px;
+    line-height: 13px;
+    text-align: center;
+    color: $white;
+  }
+
+  &:hover {
+    background: $color-sidebar-active;
+    .header__notifications-icon {
+      fill: $color-blue;
+    }
+  }
+}
