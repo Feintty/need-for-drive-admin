@@ -36,6 +36,7 @@ const Routes = () => {
       <Route path={`/admin/cars`}>
         <AdminPage>Автомобили</AdminPage>
       </Route>
+      <Redirect from="/" to={isLogged ? "/admin/orders" : "/auth"} />
       <Route path={`/admin/404`}>
         <AdminPage>Ошибка</AdminPage>
       </Route>
