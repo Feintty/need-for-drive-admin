@@ -17,7 +17,10 @@ const PagesBarReducer = (
     case PagesBarActions.PAGESBAR_NEXT:
       return {
         ...state,
-        currentPage: state.currentPage + 1,
+        currentPage:
+          state.currentPage === state.pagesCount
+            ? state.pagesCount
+            : state.currentPage + 1,
       };
     case PagesBarActions.PAGESBAR_CHANGE_CURRENT:
       return { ...state, currentPage: action.payload };
