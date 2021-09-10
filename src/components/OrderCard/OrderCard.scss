@@ -1,0 +1,51 @@
+@import "../../style/local.scss";
+
+.order-card {
+  @include flex-row;
+  justify-content: space-between;
+  align-items: center;
+  height: 88px;
+  padding: 13px 21px;
+  border-bottom: 2px solid $main-bg;
+  animation: fadein 0.5s;
+
+  &__car {
+    @include flex-row-center;
+    width: 138px;
+  }
+
+  &__image {
+    height: 63px;
+    object-fit: scale-down;
+  }
+
+  &__description {
+    @include flex-column;
+    width: 286px;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: -0.408571px;
+  }
+
+  &__info,
+  &__date {
+    margin-bottom: 6px;
+  }
+
+  &__checkboxes {
+    @include flex-column;
+    justify-content: space-between;
+    height: 56px;
+    min-width: 100px;
+  }
+
+  &__price {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    color: $black;
+    width: 131px;
+  }
+}

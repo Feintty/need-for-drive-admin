@@ -1,13 +1,14 @@
 @import "../../style/local.scss";
-.authorization{
+.authorization {
   width: 100vw;
-  height:100vh;
+  height: 100vh;
   &__wrapper {
     position: absolute;
     top: 175px;
     right: 50%;
     transform: translateX(50%);
     width: 376px;
+    animation: slidein 0.5s;
   }
   &__logo {
     @include flex-row-center;
@@ -17,7 +18,7 @@
 
   &__description {
     font-size: 24px;
-    line-height: 28px;
+    line-height: 28px;  
     font-weight: normal;
   }
   &__img {
@@ -47,7 +48,7 @@
     margin-bottom: 15px;
   }
 
-  &__actions{
+  &__actions {
     @include flex-row-center;
     justify-content: space-between;
   }
@@ -58,18 +59,28 @@
     line-height: 12px;
   }
 
-  &__login{
+  &__login {
     width: 110px;
   }
 }
 
-
 @media only screen and (max-width: 767px) {
-  .authorization__wrapper{
+  .authorization__wrapper {
     width: 100%;
-    top:10px;
-    &__content{
+    top: 10px;
+    &__content {
       border-radius: 0;
     }
+  }
+}
+
+@keyframes slidein {
+  from {
+    top: 0px;
+    opacity: 0;
+  }
+  to {
+    top: 175px;
+    opacity:1;
   }
 }

@@ -19,19 +19,27 @@ const Routes = () => {
   return (
     <Switch>
       <Redirect
-        from={isLogged ? "/auth" : "/admin/*"}
+        from={isLogged ? "/auth" : "/admin"}
         to={isLogged ? "/admin/orders" : "/auth"}
       />
-      <Route path="/auth">
+      <Route exact path="/auth">
         <AuthorizationPage />
       </Route>
-      <AdminPage>
-        <Route path={`/admin/orders`} exact>
+      <Route path={`/admin/orders/edit/:id`}>
+        <AdminPage>Редактирование заказа</AdminPage>
+      </Route>
+      <Route path={`/admin/orders`}>
+        <AdminPage>
           <OrdersTab />
-        </Route>
-        <Route path={`/admin/cars`}>Автомобили</Route>
-      </AdminPage>
-      <Redirect from="/" to="/auth" />
+        </AdminPage>
+      </Route>
+      <Route path={`/admin/cars`}>
+        <AdminPage>Автомобили</AdminPage>
+      </Route>
+      <Route path={`/admin/404`}>
+        <AdminPage>Ошибка</AdminPage>
+      </Route>
+      <Redirect to="/admin/404" />
     </Switch>
   );
 };

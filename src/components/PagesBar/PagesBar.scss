@@ -1,0 +1,39 @@
+@import "../../style/local.scss";
+
+.pages-bar {
+  @include flex-row-center;
+  height: 60px;
+  vertical-align: bottom;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 17px;
+  letter-spacing: -0.471429px;
+
+  &__active {
+    position:relative;
+    color: $white;
+    padding: 0 5px;
+    height: 18px;
+    text-align: center;
+    background: $blue;
+    border-radius: 10px;
+    line-height: 18px;
+  }
+
+  &__page,
+  &__back,
+  &__next,
+  &__mark {
+    color: $blue;
+  }
+
+  a:not(:last-child) {
+    margin-right: 7px;
+  }
+
+  a{
+      cursor: pointer;
+      user-select: none;
+  }
+}

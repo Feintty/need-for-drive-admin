@@ -22,10 +22,33 @@
     color: $white;
   }
 
+  &__icon {
+    animation: ding 3s infinite ease-in-out;
+  }
+
   &:hover {
     background: $color-sidebar-active;
     .header__notifications-icon {
       fill: $color-blue;
     }
   }
+}
+
+@keyframes ding{
+  0%{
+    transform:rotate(-15deg)
+  }
+  5%{
+    transform:rotate(15deg)
+  }
+  10%{
+    transform:rotate(-15deg)
+  }
+  15%{
+    transform:rotate(15deg)
+  }
+  20%, 100%{
+    transform:rotate(0deg)
+  }
+
 }

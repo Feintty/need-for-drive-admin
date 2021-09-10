@@ -1,8 +1,9 @@
 @import "../../style/local.scss";
 
 .orders-tab {
-  height: 100%;
-
+  @include flex-column;
+  height:100%;
+  animation: fadeout 0.5s;
   &__name {
     font-style: normal;
     font-weight: normal;
@@ -12,13 +13,30 @@
     color:$text-color;
     margin-bottom: 30px;
   }
-
+  
   &__content {
+    @include flex-column;
     box-shadow: 0px 1px 0px rgba(90, 97, 105, 0.11),
       0px 2px 4px rgba(90, 97, 105, 0.12), 0px 5px 5px rgba(90, 97, 105, 0.06),
       0px 3.5px 35px rgba(90, 97, 105, 0.1);
     border-radius: 9px;
     background: $white;
     padding: 14px 21px;
+    height: 100%;
+  }
+
+  &__orders{
+    flex-grow: 1;
+  }
+}
+
+@keyframes fadeout{
+  from{
+    opacity:0;
+    width: 0%;
+  }
+  to{
+    opacity:1;
+    width: 100%;
   }
 }
