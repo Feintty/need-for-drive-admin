@@ -4,7 +4,7 @@
   @include flex-row;
   justify-content: space-between;
   align-items: center;
-  min-height: 88px;
+  height: 88px;
   padding: 13px 21px;
   border-bottom: 2px solid $main-bg;
   animation: fadein 0.5s;
@@ -52,6 +52,8 @@
 
 @media only screen and (max-width: 1100px) {
   .order-card {
+    height: auto;
+    min-height: 88px;
     @include flex-column;
     justify-content: center;
     &__info,
