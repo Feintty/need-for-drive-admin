@@ -8,7 +8,10 @@ import {
   fetchOrders,
   setOrdersFilter,
 } from "../../store/Orders/OrdersActionCreators";
-import { pagesBarInitCalculated } from "../../store/PagesBar/PagesBarActionCreators";
+import {
+  pagesBarInitCalculated,
+  pagesBarSetCurrent,
+} from "../../store/PagesBar/PagesBarActionCreators";
 import { dataToUniqueKeyValue } from "../../utils/dataToUniqueKeyValue";
 import { getDateData, getStatusData } from "../../utils/filterData";
 import Filter from "../Filter/Filter";
@@ -64,12 +67,14 @@ const OrdersTab = () => {
 
   const onClickAccept = () => {
     dispatch(setOrdersFilter(filtersToString("order")));
-    dispatch(fetchOrders(countInPage, 0));
+    dispatch(pagesBarSetCurrent(1));
+    dispatch(fetchOrders(countInPage, currentPage - 1));
   };
 
   const onClickCancel = () => {
     dispatch(setOrdersFilter(""));
-    dispatch(fetchOrders(countInPage, 0));
+    dispatch(pagesBarSetCurrent(1));
+    dispatch(fetchOrders(countInPage, currentPage - 1));
   };
 
   return (
