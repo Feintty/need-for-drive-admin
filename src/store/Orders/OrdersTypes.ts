@@ -2,9 +2,9 @@ import { OrdersActions } from "./OrdersActions";
 
 export interface IOrdersInitial {
   data: null | Array<any>;
-  filteredData?: Array<object>;
   dataCount: number;
   error?: false | string;
+  filter?: string;
 }
 
 interface IOrdersInit {
@@ -24,13 +24,13 @@ interface IOrderDefault {
   type: OrdersActions.ORDERS_DEFAULT;
 }
 
-interface IOrdersInitFilter {
-  type: OrdersActions.ORDERS_FILTER;
-  payload: Array<object>;
+interface IOrderSetFilter {
+  type: OrdersActions.ORDERS_SET_FILTER;
+  payload: string;
 }
 
 export type OrdersAction =
   | IOrdersInit
   | IOrdersInitError
-  | IOrdersInitFilter
-  | IOrderDefault;
+  | IOrderDefault
+  | IOrderSetFilter;

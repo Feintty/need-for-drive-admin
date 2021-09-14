@@ -1,8 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { fetchOrders } from "../../store/Orders/OrdersActionCreators";
+import { fetchCars } from "../../store/Cars/CarsActionCreators";
+import { fetchCities } from "../../store/Cities/CitiesActionCreators";
+import { filtersToString } from "../../store/Filter/FilterActionCreators";
+import {
+  fetchOrders,
+  setOrdersFilter,
+} from "../../store/Orders/OrdersActionCreators";
 import { pagesBarInitCalculated } from "../../store/PagesBar/PagesBarActionCreators";
+import { dataToUniqueKeyValue } from "../../utils/dataToUniqueKeyValue";
+import { getDateData, getStatusData } from "../../utils/filterData";
+import Filter from "../Filter/Filter";
 import SpinLoader from "../Loader/Loader";
 import OrderCard from "../OrderCard/OrderCard";
 import PagesBar from "../PagesBar/PagesBar";
@@ -12,9 +21,15 @@ const OrdersTab = () => {
   const dispatch = useDispatch();
   const { data, dataCount } = useTypedSelector((state) => state.orders);
   const { currentPage } = useTypedSelector((state) => state.pages);
+  const cities = useTypedSelector((state) => state.cities);
+  const cars = useTypedSelector((state) => state.cars);
   const countInPage = 6;
+
   useEffect(() => {
+    dispatch(setOrdersFilter(""));
     dispatch(fetchOrders(countInPage, 0));
+    dispatch(fetchCities());
+    dispatch(fetchCars());
   }, []);
 
   useEffect(() => {
@@ -47,15 +62,75 @@ const OrdersTab = () => {
     ));
   };
 
+  const onClickAccept = () => {
+    dispatch(setOrdersFilter(filtersToString("order")));
+    dispatch(fetchOrders(countInPage, 0));
+  };
+
+  const onClickCancel = () => {
+    dispatch(setOrdersFilter(""));
+    dispatch(fetchOrders(countInPage, 0));
+  };
+
   return (
     <div className="orders-tab">
       <h3 className="orders-tab__name">Заказы</h3>
-      <div className="orders-tab__content">
-        <div className="orders-tab__orders">
-          {data ? dataToCards() : <SpinLoader />}
+      {cities.data && cars.data ? (
+        <div className="orders-tab__content">
+          <div className="orders-tab__heading">
+            <div className="orders-tab__filters">
+              <>
+                <Filter
+                  dataType="order"
+                  head="Выбрать город"
+                  dataKey="cityId"
+                  data={dataToUniqueKeyValue(cities.data)}
+                />
+                <Filter
+                  dataType="order"
+                  head="Выбрать авто"
+                  dataKey="carId"
+                  data={dataToUniqueKeyValue(cars.data)}
+                />
+                <Filter
+                  dataType="order"
+                  head="Выбрать время"
+                  dataKey="dateFrom[$gt]"
+                  data={getDateData()}
+                />
+                <Filter
+                  dataType="order"
+                  head="Выбрать Статус"
+                  dataKey="orderStatusId"
+                  data={getStatusData()}
+                />
+              </>
+            </div>
+            <div className="orders-tab__buttons">
+              <button
+                className="orders-tab__button button-default"
+                onClick={onClickAccept}
+              >
+                Применить
+              </button>
+              <button
+                className="orders-tab__button button-alert"
+                onClick={onClickCancel}
+              >
+                Сбросить
+              </button>
+            </div>
+          </div>
+          <div className="orders-tab__orders">
+            {data ? dataToCards() : <SpinLoader />}
+          </div>
+          <PagesBar />
         </div>
-        <PagesBar />
-      </div>
+      ) : (
+        <div className="orders-tab__content">
+          <SpinLoader />
+        </div>
+      )}
     </div>
   );
 };

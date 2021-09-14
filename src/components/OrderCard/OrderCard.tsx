@@ -37,10 +37,10 @@ const OrderCard: React.FC<IOrderProps> = ({
       <div className="order-card__car">
         <img
           className="order-card__image"
-          alt="car"
+          alt={`car-${carName}`}
           src={
             image
-              ? `http://api-factory.simbirsoft1.com/${image}`
+              ? `https://api-factory.simbirsoft1.com/${image}`
               : "https://www.vippng.com/png/detail/103-1037052_vector-type-car-export-car-icon.png"
           }
         />

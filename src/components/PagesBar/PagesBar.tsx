@@ -25,9 +25,9 @@ const PagesBar = () => {
   };
 
   const firstSide = () => {
-    const returnArr = [];
+    const pagesArray = [];
     for (let i = 1; i <= 4; i++) {
-      returnArr.push(
+      pagesArray.push(
         <a
           onClick={onNumberClick}
           className={
@@ -38,13 +38,13 @@ const PagesBar = () => {
         </a>
       );
     }
-    returnArr.push(<a className="pages-bar__mark">...</a>);
-    returnArr.push(
+    pagesArray.push(<a className="pages-bar__mark">...</a>);
+    pagesArray.push(
       <a onClick={onNumberClick} className="pages-bar__page">
         {pagesCount}
       </a>
     );
-    return returnArr;
+    return pagesArray;
   };
 
   const middleSide = (
@@ -70,16 +70,16 @@ const PagesBar = () => {
   );
 
   const endSide = () => {
-    const returnArr = [];
-    returnArr.push(
+    const pagesArray = [];
+    pagesArray.push(
       <a onClick={onNumberClick} className="pages-bar__page">
         1
       </a>
     );
-    returnArr.push(<a className="pages-bar__mark">...</a>);
+    pagesArray.push(<a className="pages-bar__mark">...</a>);
 
     for (let i = pagesCount - 3; i <= pagesCount; i++) {
-      returnArr.push(
+      pagesArray.push(
         <a
           onClick={onNumberClick}
           className={
@@ -90,7 +90,24 @@ const PagesBar = () => {
         </a>
       );
     }
-    return returnArr;
+    return pagesArray;
+  };
+
+  const tooShort = () => {
+    const pagesArray = [];
+    for (let i = 1; i <= pagesCount; i++) {
+      pagesArray.push(
+        <a
+          onClick={onNumberClick}
+          className={
+            i === currentPage ? "pages-bar__active" : "pages-bar__page"
+          }
+        >
+          {i}
+        </a>
+      );
+    }
+    return pagesArray;
   };
 
   if (pagesCount)
@@ -101,9 +118,15 @@ const PagesBar = () => {
           role="button"
           onClick={onBackClick}
         >{`«`}</a>
-        {currentPage < 4 && firstSide().map((el) => el)}
-        {currentPage >= 4 && currentPage < pagesCount - 2 && middleSide}
-        {currentPage > pagesCount - 3 && endSide().map((el) => el)}
+        {currentPage < 4 && pagesCount > 7 && firstSide().map((el) => el)}
+        {currentPage >= 4 &&
+          pagesCount > 7 &&
+          currentPage < pagesCount - 2 &&
+          middleSide}
+        {currentPage > pagesCount - 3 &&
+          pagesCount > 7 &&
+          endSide().map((el) => el)}
+        {pagesCount <= 7 && tooShort().map((el) => el)}
         <a
           className="pages-bar__next"
           role="button"

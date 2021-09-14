@@ -34,6 +34,12 @@
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .notify{
+    display: none;
+  }
+}
+
 @keyframes ding{
   0%{
     transform:rotate(-15deg)

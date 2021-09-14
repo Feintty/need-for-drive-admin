@@ -7,11 +7,12 @@ import { OrdersAction } from "./OrdersTypes";
 export const fetchOrders = (count: number, page: number) => {
   return async (dispatch: Dispatch<OrdersAction>) => {
     const { accessToken } = store.getState().user;
+    const { filter } = store.getState().orders;
     dispatch({
       type: OrdersActions.ORDERS_DEFAULT,
     });
     await axios({
-      baseURL: `${process.env.REACT_APP_API_URL}/db/order?limit=${count}&page=${page}`,
+      baseURL: `${process.env.REACT_APP_API_URL}/db/order?limit=${count}&page=${page}${filter}`,
       method: "GET",
       headers: {
         "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
@@ -38,19 +39,11 @@ export const fetchOrders = (count: number, page: number) => {
   };
 };
 
-// export const setFilteredOrders = () => {
-//   return (dispatch: Dispatch<UserAction>) => {
-//     const userData = cookies.load("userData");
-
-//     if (userData) {
-//       const { refreshToken, accessToken } = userData;
-//       dispatch({
-//         type: UserActions.USER_LOGIN_SUCCES,
-//         payload: {
-//           accessToken,
-//           refreshToken,
-//         },
-//       });
-//     }
-//   };
-// };
+export const setOrdersFilter = (currentFilter: string) => {
+  return (dispatch: Dispatch<OrdersAction>) => {
+    dispatch({
+      type: OrdersActions.ORDERS_SET_FILTER,
+      payload: currentFilter,
+    });
+  };
+};

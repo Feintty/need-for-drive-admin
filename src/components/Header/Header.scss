@@ -12,6 +12,7 @@
     outline: none;
     padding: 26px 51px;
     flex-grow: 1;
+    width: 150px;
   }
 
   &__placeholder-icon {
@@ -31,5 +32,14 @@
 
   &__user {
     border-left: 2px solid $main-bg;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .header{
+    &__search, &__placeholder-icon{
+      display:none;
+    }
+    justify-content:right;
   }
 }
