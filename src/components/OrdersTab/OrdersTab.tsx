@@ -33,6 +33,7 @@ const OrdersTab = () => {
     dispatch(fetchOrders(countInPage, 0));
     dispatch(fetchCities());
     dispatch(fetchCars());
+    dispatch(pagesBarSetCurrent(1));
   }, []);
 
   useEffect(() => {

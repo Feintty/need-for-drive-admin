@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { normalizeImgPath } from "../../utils/normalizeImgPath";
 import "./OrderCard.scss";
 const moment = require("moment");
 
@@ -38,11 +39,7 @@ const OrderCard: React.FC<IOrderProps> = ({
         <img
           className="order-card__image"
           alt={`car-${carName}`}
-          src={
-            image
-              ? `https://api-factory.simbirsoft1.com/${image}`
-              : "https://www.vippng.com/png/detail/103-1037052_vector-type-car-export-car-icon.png"
-          }
+          src={normalizeImgPath(image)}
         />
       </div>
 
