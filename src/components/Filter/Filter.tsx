@@ -29,9 +29,14 @@ const Filter: React.FC<IFilterProps> = ({ dataType, head, data, dataKey }) => {
     }
   };
 
-  const onHeadClick = () => {
+  const onFilterClick = () => {
+    setIsOpened(!isOpened);
+  };
+
+  const onDefaultClick = () => {
     setIsOpened(!isOpened);
     dispatch(filterAdd(dataType, dataKey, ""));
+    setCurrentElement(head);
   };
 
   const createList = () => {
@@ -51,11 +56,11 @@ const Filter: React.FC<IFilterProps> = ({ dataType, head, data, dataKey }) => {
 
   return (
     <div className="dropdown-filter">
-      <div className="dropdown-filter__head" onClick={onHeadClick}>
+      <div className="dropdown-filter__head" onClick={onFilterClick}>
         {currentElement}
       </div>
       <ul className={listClassname}>
-        <li className="dropdown-filter__element" onClick={onElementClick}>
+        <li className="dropdown-filter__element" onClick={onDefaultClick}>
           {head}
         </li>
         {createList().map((el) => el)}
