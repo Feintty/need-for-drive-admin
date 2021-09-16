@@ -28,10 +28,10 @@ const CarsTab = () => {
   const countInPage = 8;
 
   useEffect(() => {
-    dispatch(pagesBarSetCurrent(1));
     dispatch(setCarsFilter(""));
     dispatch(fetchCarsFiltered(countInPage, 0));
     dispatch(fetchCategory());
+    dispatch(pagesBarSetCurrent(1));
   }, []);
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const CarsTab = () => {
         </div>
         <div className="cars-tab__cars">
           <Snackbar snackbarId="cars" />
-          {dataFiltered ? (
+          {dataFiltered && dataFiltered.length > 0 ? (
             <Table
               data={dataFiltered?.map((el) => ({
                 Изображение: (

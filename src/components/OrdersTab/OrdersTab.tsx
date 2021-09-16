@@ -129,7 +129,7 @@ const OrdersTab = () => {
             </div>
           </div>
           <div className="orders-tab__orders">
-            <Snackbar snackbarId="category" />
+            <Snackbar snackbarId="orders" />
             {data ? dataToCards() : <SpinLoader />}
           </div>
           <PagesBar />

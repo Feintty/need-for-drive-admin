@@ -20,7 +20,7 @@ const CarsReducer = (state = CarsInitial, action: CarsAction): ICarsInitial => {
       return {
         ...state,
         ...action.payload,
-        data: state.dataFiltered,
+        data: state.data,
         error: false,
       };
     case CarsActions.CARS_ERROR:
@@ -32,6 +32,7 @@ const CarsReducer = (state = CarsInitial, action: CarsAction): ICarsInitial => {
       return {
         ...state,
         dataFiltered: null,
+        dataCount: 0,
       };
     default:
       return state;
