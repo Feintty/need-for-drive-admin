@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { fetchCities } from "../../store/Cities/CitiesActionCreators";
 import SpinLoader from "../Loader/Loader";
+import Snackbar from "../Snackbar/Snackbar";
 import Table from "../Table/Table";
 import "./CitiesTab.scss";
 
@@ -27,6 +28,7 @@ const CitiesTab = () => {
           </div>
         </div>
         <div className="cities-tab__categories">
+          <Snackbar snackbarId="cities" />
           {data ? (
             <Table
               data={data?.map((el) => ({

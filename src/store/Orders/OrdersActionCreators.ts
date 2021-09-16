@@ -3,9 +3,11 @@ import axios from "axios";
 import store from "../store";
 import { OrdersActions } from "./OrdersActions";
 import { OrdersAction } from "./OrdersTypes";
+import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
+import errorCodeToMessage from "../../utils/errorCodeToMessage";
 
 export const fetchOrders = (count: number, page: number) => {
-  return async (dispatch: Dispatch<OrdersAction>) => {
+  return async (dispatch: Dispatch<any>) => {
     const { accessToken } = store.getState().user;
     const { filter } = store.getState().orders;
     dispatch({
@@ -34,6 +36,13 @@ export const fetchOrders = (count: number, page: number) => {
             type: OrdersActions.ORDERS_INIT_ERROR,
             payload: error.response.status.toString(),
           });
+          dispatch(
+            snackbarOpen(
+              "orders",
+              errorCodeToMessage(error.response.status.toString()),
+              "error"
+            )
+          );
         }
       });
   };

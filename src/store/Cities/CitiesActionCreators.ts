@@ -1,10 +1,11 @@
 import { Dispatch } from "redux";
 import axios from "axios";
-import { CitiesAction } from "./CitiesTypes";
 import { CitiesActions } from "./CitiesActions";
+import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
+import errorCodeToMessage from "../../utils/errorCodeToMessage";
 
 export const fetchCities = () => {
-  return async (dispatch: Dispatch<CitiesAction>) => {
+  return async (dispatch: Dispatch<any>) => {
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/city`,
       method: "GET",
@@ -27,6 +28,13 @@ export const fetchCities = () => {
             type: CitiesActions.CITIES_ERROR,
             payload: error.response.status.toString(),
           });
+          dispatch(
+            snackbarOpen(
+              "cities",
+              errorCodeToMessage(error.response.status.toString()),
+              "error"
+            )
+          );
         }
       });
   };

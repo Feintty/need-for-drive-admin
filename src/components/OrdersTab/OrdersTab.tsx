@@ -18,6 +18,7 @@ import Filter from "../Filter/Filter";
 import SpinLoader from "../Loader/Loader";
 import OrderCard from "../OrderCard/OrderCard";
 import PagesBar from "../PagesBar/PagesBar";
+import Snackbar from "../Snackbar/Snackbar";
 import "./OrdersTab.scss";
 
 const OrdersTab = () => {
@@ -128,6 +129,7 @@ const OrdersTab = () => {
             </div>
           </div>
           <div className="orders-tab__orders">
+            <Snackbar snackbarId="category" />
             {data ? dataToCards() : <SpinLoader />}
           </div>
           <PagesBar />

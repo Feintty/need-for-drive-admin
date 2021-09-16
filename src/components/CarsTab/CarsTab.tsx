@@ -16,6 +16,7 @@ import { normalizeImgPath } from "../../utils/normalizeImgPath";
 import Filter from "../Filter/Filter";
 import SpinLoader from "../Loader/Loader";
 import PagesBar from "../PagesBar/PagesBar";
+import Snackbar from "../Snackbar/Snackbar";
 import Table from "../Table/Table";
 import "./CarsTab.scss";
 
@@ -75,6 +76,7 @@ const CarsTab = () => {
           </div>
         </div>
         <div className="cars-tab__cars">
+          <Snackbar snackbarId="cars" />
           {dataFiltered ? (
             <Table
               data={dataFiltered?.map((el) => ({
