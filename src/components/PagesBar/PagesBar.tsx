@@ -8,7 +8,7 @@ import {
 } from "../../store/PagesBar/PagesBarActionCreators";
 import "./PagesBar.scss";
 
-const PagesBar = () => {
+const PagesBar: React.FC = () => {
   const dispatch = useDispatch();
   const { pagesCount, currentPage } = useTypedSelector((state) => state.pages);
 

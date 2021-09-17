@@ -21,7 +21,7 @@ import PagesBar from "../PagesBar/PagesBar";
 import Snackbar from "../Snackbar/Snackbar";
 import "./OrdersTab.scss";
 
-const OrdersTab = () => {
+const OrdersTab: React.FC = () => {
   const dispatch = useDispatch();
   const { data, dataCount } = useTypedSelector((state) => state.orders);
   const { currentPage } = useTypedSelector((state) => state.pages);

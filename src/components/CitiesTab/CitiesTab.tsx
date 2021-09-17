@@ -8,7 +8,7 @@ import Snackbar from "../Snackbar/Snackbar";
 import Table from "../Table/Table";
 import "./CitiesTab.scss";
 
-const CitiesTab = () => {
+const CitiesTab: React.FC = () => {
   const dispatch = useDispatch();
   const { data } = useTypedSelector((state) => state.cities);
 
