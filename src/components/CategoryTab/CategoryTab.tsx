@@ -22,9 +22,14 @@ const CategoryTab = () => {
       <div className="category-tab__content">
         <div className="category-tab__heading">
           <div className="category-tab__buttons">
-            <button className="category-tab__button button-default">
-              Добавить
-            </button>
+            <Link to={`/admin/category/new`}>
+              <button
+                type="button"
+                className="category-tab__button button-correct"
+              >
+                Добавить
+              </button>
+            </Link>
           </div>
         </div>
         <div className="category-tab__categories">

@@ -22,9 +22,14 @@ const CitiesTab: React.FC = () => {
       <div className="cities-tab__content">
         <div className="cities-tab__heading">
           <div className="cities-tab__buttons">
-            <button className="cities-tab__button button-default">
-              Добавить
-            </button>
+            <Link to={`/admin/cities/new`}>
+              <button
+                type="button"
+                className="cities-tab__button button-correct"
+              >
+                Добавить
+              </button>
+            </Link>
           </div>
         </div>
         <div className="cities-tab__categories">

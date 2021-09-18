@@ -50,6 +50,12 @@ const CarsTab = () => {
     dispatch(fetchCarsFiltered(countInPage, currentPage - 1));
   };
 
+  const onClickCancel = () => {
+    dispatch(setCarsFilter(""));
+    dispatch(pagesBarSetCurrent(1));
+    dispatch(fetchCarsFiltered(countInPage, currentPage - 1));
+  };
+
   return (
     <div className="cars-tab">
       <div className="cars-tab__name">Автомобили</div>
@@ -72,7 +78,17 @@ const CarsTab = () => {
             >
               Применить
             </button>
-            <button className="cars-tab__button button-alert">Сбросить</button>
+            <button
+              className="cars-tab__button button-alert"
+              onClick={onClickCancel}
+            >
+              Сбросить
+            </button>
+            <Link to={`/admin/cars/new`}>
+              <button type="button" className="cars-tab__button button-correct">
+                Добавить
+              </button>
+            </Link>
           </div>
         </div>
         <div className="cars-tab__cars">
