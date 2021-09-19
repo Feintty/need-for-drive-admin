@@ -1,0 +1,46 @@
+@import "../../style/local.scss";
+
+.error-tab {
+  width: 100%;
+  height: 100%;
+  @include flex-column-center;
+
+  &__content{
+      @include flex-column-center;
+  }
+ 
+  &__error-code {
+    font-weight: 500;
+    font-size: 75px;
+    line-height: 88px;
+    letter-spacing: -5.76923px;
+    color:$error-color;
+    margin-bottom: 13px;
+  }
+
+  &__description{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 57px;
+    text-align: center;
+    letter-spacing: -2.5px;
+    color:$text-color;
+    margin-bottom: 15px;
+  }
+
+  &__tip{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    letter-spacing: -0.5px;
+    color:$color-gray-alt;
+    margin-bottom: 35px;
+  }
+
+  &__back{
+    width: 95px;
+  }
+}
