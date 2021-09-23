@@ -32,7 +32,7 @@ const CitiesTab: React.FC = () => {
             </Link>
           </div>
         </div>
-        <div className="cities-tab__categories">
+        <div className="cities-tab__cities">
           <Snackbar snackbarId="cities" />
           {data ? (
             <Table

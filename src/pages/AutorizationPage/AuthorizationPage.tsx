@@ -30,6 +30,14 @@ const AuthorizationPage: React.FC = () => {
     dispatch(login(mail.value, password.value));
   };
 
+  const mailSetter = (mailValue: string) => {
+    dispatch(setMail(mailValue));
+  };
+
+  const passwordSetter = (passwordValue: string) => {
+    dispatch(setPassword(passwordValue));
+  };
+
   return (
     <div className="authorization">
       <div className="authorization__wrapper">
@@ -44,15 +52,17 @@ const AuthorizationPage: React.FC = () => {
               description="Почта"
               placeholder="Введите почту"
               type="text"
-              setter={setMail}
+              setter={mailSetter}
               isCorrect={mail.isCorrect}
+              value={mail.value}
             />
             <Input
               description="Пароль"
               placeholder="Введите пароль"
               type="password"
-              setter={setPassword}
+              setter={passwordSetter}
               isCorrect={password.isCorrect}
+              value={password.value}
             />
           </div>
           <div className="authorization__actions">

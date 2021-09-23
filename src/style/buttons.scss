@@ -55,6 +55,13 @@ button:hover {
   border-radius: 8px;
 }
 
+.button-correct {
+  @include button-props;
+  color: $white;
+  @include button-background($main-accent);
+  border-radius: 8px;
+}
+
 .button-disabled {
   @include button-props;
   color: $white;
