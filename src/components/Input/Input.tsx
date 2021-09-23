@@ -23,7 +23,9 @@ const Input: React.FC<IInputProps> = ({
     incorrect: !isCorrect,
   });
 
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSetValueOnChangeInput = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (setter) {
       dispatch(setter(e.target.value));
     }
@@ -44,7 +46,7 @@ const Input: React.FC<IInputProps> = ({
         className={inputClass}
         type={type}
         placeholder={placeholder}
-        onChange={onInputChange}
+        onChange={handleSetValueOnChangeInput}
       />
     </div>
   );

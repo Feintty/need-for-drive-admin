@@ -4,15 +4,20 @@ import AuthorizationPage from "./pages/AutorizationPage/AuthorizationPage";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import { checkIsUserExists, exitUser } from "./store/User/UserActionCreators";
+import { selectUser } from "./store/selectors";
 
 const Routes = () => {
-  const { isLogged } = useTypedSelector((state) => state.user);
+  const { isLogged } = useTypedSelector(selectUser);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!isLogged) {
       dispatch(checkIsUserExists());
     }
   }, []);
+
+  const handleExitClick = () => {
+    dispatch(exitUser());
+  };
 
   return (
     <Switch>
@@ -25,7 +30,7 @@ const Routes = () => {
       </Route>
       <Route path="/admin/orders">
         <div>Вы уже авторизованы</div>
-        <button onClick={() => dispatch(exitUser())}>Выйти</button>
+        <button onClick={handleExitClick}>Выйти</button>
       </Route>
       <Redirect from="/" to="/auth" />
     </Switch>
