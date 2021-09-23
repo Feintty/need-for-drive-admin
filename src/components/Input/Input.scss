@@ -2,6 +2,7 @@
 
 .input-default {
   @include flex-column;
+  transition: 0.3s ease-in-out;
 
   &__description {
     margin-bottom: 8.5px;
@@ -28,5 +29,9 @@
     &:focus {
       outline: none;
     }
+  }
+
+  .incorrect:focus{
+    border: 1px solid $color-red;
   }
 }

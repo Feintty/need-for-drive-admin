@@ -1,12 +1,14 @@
 @import "../../style/local.scss";
-
-.authorization {
-  position: absolute;
-  top: 175px;
-  right: 50%;
-  transform: translateX(50%);
-  width: 376px;
-
+.authorization{
+  width: 100vw;
+  height:100vh;
+  &__wrapper {
+    position: absolute;
+    top: 175px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 376px;
+  }
   &__logo {
     @include flex-row-center;
     color: $text-color;
@@ -61,8 +63,9 @@
   }
 }
 
+
 @media only screen and (max-width: 767px) {
-  .authorization{
+  .authorization__wrapper{
     width: 100%;
     top:10px;
     &__content{
