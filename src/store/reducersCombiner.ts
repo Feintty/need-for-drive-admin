@@ -8,6 +8,7 @@ import CitiesReducer from "./Cities/CitiesReducer";
 import CitiesManagerReducer from "./CitiesManager/CitiesManagerReducer";
 import FilterReducer from "./Filter/FilterReducer";
 import OrdersReducer from "./Orders/OrdersReducer";
+import OrdersManagerReducer from "./OrdersManager/OrdersManagerReducer";
 import PagesBarReducer from "./PagesBar/PagesBarReducer";
 import SidebarReducer from "./Sidebar/SidebarReducer";
 import SnackbarReducer from "./Snackbar/SnackbarReducer";
@@ -27,6 +28,7 @@ export const combinedReducers = combineReducers({
   citiesManager: CitiesManagerReducer,
   categoryManager: CategoryManagerReducer,
   carsManager: CarsManagerReducer,
+  ordersManager: OrdersManagerReducer,
 });
 
 export type RootState = ReturnType<typeof combinedReducers>;

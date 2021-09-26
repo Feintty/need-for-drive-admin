@@ -90,10 +90,7 @@ const CarsManagerFields = () => {
       {categoryData.data && (
         <Filter
           head="Выбрать категорию"
-          data={
-            categoryData.data &&
-            categoryData.data.map((el) => ({ [el.name]: el.id }))
-          }
+          data={categoryData.data.map((el) => ({ [el.name]: el.id }))}
           setter={setCarsManagerCategoryId}
           description="Тип автомобиля"
         />

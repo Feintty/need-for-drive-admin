@@ -11,6 +11,7 @@ interface IFilterProps {
   data: Array<object>;
   setter?: (args: any) => void;
   description?: string;
+  current?: string;
 }
 
 const Filter: React.FC<IFilterProps> = ({
@@ -20,9 +21,12 @@ const Filter: React.FC<IFilterProps> = ({
   dataKey = "",
   setter,
   description = "",
+  current = "",
 }) => {
   const [isOpened, setIsOpened] = useState(false);
-  const [currentElement, setCurrentElement] = useState(head);
+  const [currentElement, setCurrentElement] = useState(
+    current ? current : head
+  );
   const dispatch = useDispatch();
 
   const listClassname = classNames({
