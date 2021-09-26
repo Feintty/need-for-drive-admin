@@ -5,13 +5,22 @@ import { filterAdd } from "../../store/Filter/FilterActionCreators";
 import "./Filter.scss";
 
 interface IFilterProps {
-  dataType: string;
-  dataKey: string;
+  dataType?: string;
+  dataKey?: string;
   head: string;
   data: Array<object>;
+  setter?: (args: any) => void;
+  description?: string;
 }
 
-const Filter: React.FC<IFilterProps> = ({ dataType, head, data, dataKey }) => {
+const Filter: React.FC<IFilterProps> = ({
+  dataType = "",
+  head,
+  data,
+  dataKey = "",
+  setter,
+  description = "",
+}) => {
   const [isOpened, setIsOpened] = useState(false);
   const [currentElement, setCurrentElement] = useState(head);
   const dispatch = useDispatch();
@@ -21,11 +30,19 @@ const Filter: React.FC<IFilterProps> = ({ dataType, head, data, dataKey }) => {
     hide: !isOpened,
   });
 
+  const setByTypeOfFilter = (value: string) => {
+    if (setter) {
+      setter(value);
+    } else {
+      dispatch(filterAdd(dataType, dataKey, value));
+    }
+  };
+
   const onElementClick = (event: React.MouseEvent<HTMLElement>) => {
     setCurrentElement(event.currentTarget.innerText);
     setIsOpened(!isOpened);
     if (event.currentTarget.id) {
-      dispatch(filterAdd(dataType, dataKey, event.currentTarget.id));
+      setByTypeOfFilter(event.currentTarget.id);
     }
   };
 
@@ -35,7 +52,7 @@ const Filter: React.FC<IFilterProps> = ({ dataType, head, data, dataKey }) => {
 
   const onDefaultClick = () => {
     setIsOpened(!isOpened);
-    dispatch(filterAdd(dataType, dataKey, ""));
+    setByTypeOfFilter("");
     setCurrentElement(head);
   };
 
@@ -56,15 +73,20 @@ const Filter: React.FC<IFilterProps> = ({ dataType, head, data, dataKey }) => {
 
   return (
     <div className="dropdown-filter">
-      <div className="dropdown-filter__head" onClick={onFilterClick}>
-        {currentElement}
+      {description && (
+        <div className="dropdown-filter__description">{description}</div>
+      )}
+      <div className="dropdown-filter__body">
+        <div className="dropdown-filter__head" onClick={onFilterClick}>
+          {currentElement}
+        </div>
+        <ul className={listClassname}>
+          <li className="dropdown-filter__element" onClick={onDefaultClick}>
+            {head}
+          </li>
+          {createList().map((el) => el)}
+        </ul>
       </div>
-      <ul className={listClassname}>
-        <li className="dropdown-filter__element" onClick={onDefaultClick}>
-          {head}
-        </li>
-        {createList().map((el) => el)}
-      </ul>
     </div>
   );
 };

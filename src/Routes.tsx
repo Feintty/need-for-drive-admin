@@ -11,6 +11,7 @@ import CategoryTab from "./components/CategoryTab/CategoryTab";
 import CitiesTab from "./components/CitiesTab/CitiesTab";
 import CitiesManager from "./components/CitiesManager/CitiesManager";
 import CategoryManager from "./components/CategoryManager/CategoryManager";
+import CarsManager from "./components/CarsManager/CarsManager";
 
 const Routes = () => {
   const { isLogged } = useTypedSelector((state) => state.user);
@@ -39,7 +40,14 @@ const Routes = () => {
         </AdminPage>
       </Route>
       <Route path={`/admin/cars/edit/:id`}>
-        <AdminPage>Редактирование авто</AdminPage>
+        <AdminPage>
+          <CarsManager />
+        </AdminPage>
+      </Route>
+      <Route path={`/admin/cars/new`}>
+        <AdminPage>
+          <CarsManager />
+        </AdminPage>
       </Route>
       <Route path={`/admin/cars`}>
         <AdminPage>

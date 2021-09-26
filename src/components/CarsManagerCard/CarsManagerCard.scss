@@ -1,0 +1,126 @@
+@import "../../style/local.scss";
+
+.cars-manager-card{
+    @include flex-column;
+    align-items: center;
+    width: 335px;
+    min-width: 270px;
+    background-color: $white;
+    box-shadow: 0px 2px 4px rgba(90, 97, 105, 0.12);
+    border-radius: 9px;
+    padding: 35px 0;
+    margin-right: 28px;
+
+  &__img {
+    height: 110px;
+    margin-bottom: 10px;
+    object-fit: scale-down;
+  }
+
+  &__car-name {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24.5px;
+    line-height: 28px;
+    text-align: center;
+    letter-spacing: -0.6125px;
+    color: $text-color;
+    margin-bottom: 4px;
+  }
+
+  &__type {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12.5px;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: -0.3125px;
+    color: $color-gray-alt;
+    margin-bottom: 10px;
+  }
+
+  &__file-manager {
+    @include flex-row;
+    margin-bottom: 22px;
+  }
+
+  &__file-select,
+  &__file-search {
+    border: none;
+    border: 1px solid $gray-dark;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: -0.175439px;
+    color: $color-dark;
+    padding: 8px 13px;
+  }
+
+  &__file-input{
+      opacity: 0%;
+      max-height: 0;
+      max-width: 0;
+      margin:0;
+      padding:0;
+      position:absolute;
+  }
+
+  &__file-select {
+    border-radius: 4px 0 0 4px;
+    width: 166px;
+    background: $white;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+
+  }
+
+  &__file-search {
+      position: relative;
+    background: $color-disabled;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    transition: 0.2s ease-in-out;
+    width: 65px;
+    &:hover {
+      background: $blue;
+      color: $white;
+    }
+  }
+
+  &__progress {
+    padding: 14px 22px;
+    width: 100%;
+    border-top: 2px solid $main-bg;
+    border-bottom: 2px solid $main-bg;
+  }
+
+  &__description {
+    width: 100%;
+    padding: 22px 22px;
+
+    .input-default {
+      &__description {
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 15px;
+        letter-spacing: -0.408571px;
+        color: $color-gray-alt;
+      }
+      &__input{
+          padding:0;
+          border:none;
+          color:$color-button-text;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .cars-manager-card {
+   width: 100%;
+   margin-bottom: 22px;
+  }
+}

@@ -16,7 +16,7 @@ interface ICategoryManagerChangeData {
   payload: object;
 }
 
-interface ICategoryChangeId {
+interface ICategoryManagerChangeId {
   type: CategoryManagerActions.CATEGORY_MANAGER_CHANGE_ID;
   payload: string;
 }
@@ -29,4 +29,4 @@ interface ICategoryManagerError {
 export type CategoryManagerAction =
   | ICategoryManagerChangeData
   | ICategoryManagerError
-  | ICategoryChangeId;
+  | ICategoryManagerChangeId;

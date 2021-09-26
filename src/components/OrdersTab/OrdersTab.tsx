@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { fetchCars } from "../../store/Cars/CarsActionCreators";
 import { fetchCities } from "../../store/Cities/CitiesActionCreators";
@@ -127,14 +126,6 @@ const OrdersTab: React.FC = () => {
               >
                 Сбросить
               </button>
-              <Link to={`/admin/orders/new`}>
-                <button
-                  type="button"
-                  className="orders-tab__button button-correct"
-                >
-                  Добавить
-                </button>
-              </Link>
             </div>
           </div>
           <div className="orders-tab__orders">

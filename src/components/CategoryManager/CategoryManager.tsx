@@ -75,8 +75,8 @@ const CategoryManager: React.FC = () => {
           value={categoryManager.data.name}
         />
         <Input
-          description="Название"
-          placeholder="Введите название категории"
+          description="Описание"
+          placeholder="Введите описание"
           type="text"
           setter={setCategoryManagerDescription}
           isCorrect={true}
