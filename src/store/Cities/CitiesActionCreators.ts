@@ -2,15 +2,14 @@ import { Dispatch } from "redux";
 import axios from "axios";
 import { CitiesAction } from "./CitiesTypes";
 import { CitiesActions } from "./CitiesActions";
+import { basicHeader } from "../../Api/Headers";
 
 export const fetchCities = () => {
   return async (dispatch: Dispatch<CitiesAction>) => {
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/city`,
       method: "GET",
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-      },
+      headers: basicHeader,
     })
       .then((response) => {
         dispatch({

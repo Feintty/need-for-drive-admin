@@ -5,7 +5,7 @@ import Search from "../../assets/icons/search.svg";
 import Notify from "../Notify/Notify";
 import UserBar from "../UserBar/UserBar";
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <header className="header">
       <img alt="search" className="header__placeholder-icon" src={Search} />

@@ -5,6 +5,7 @@ import cookies from "react-cookies";
 import axios from "axios";
 import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
 import errorCodeToMessage from "../../utils/errorCodeToMessage";
+import { authorizationHeader } from "../../Api/Headers";
 
 export const login = (mail: string, password: string) => {
   return async (dispatch: Dispatch<UserAction>) => {
@@ -16,10 +17,7 @@ export const login = (mail: string, password: string) => {
         username: mail,
         password: password,
       },
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-        Authorization: process.env.REACT_APP_AUTHORIZATION_KEY,
-      },
+      headers: authorizationHeader,
     })
       .then((response) => {
         console.log(typeof snackbarOpen);

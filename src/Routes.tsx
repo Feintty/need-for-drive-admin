@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import OrdersTab from "./components/OrdersTab/OrdersTab";
-import { checkIsUserExists, exitUser } from "./store/User/UserActionCreators";
+import { checkIsUserExists } from "./store/User/UserActionCreators";
 import { selectUser } from "./store/selectors";
 
 const Routes = () => {
@@ -17,10 +17,6 @@ const Routes = () => {
     }
   }, []);
 
-  const handleExitClick = () => {
-    dispatch(exitUser());
-  };
-
   return (
     <Switch>
       <Redirect
@@ -29,10 +25,6 @@ const Routes = () => {
       />
       <Route exact path="/auth">
         <AuthorizationPage />
-      </Route>
-      <Route path="/admin/orders">
-        <div>Вы уже авторизованы</div>
-        <button onClick={handleExitClick}>Выйти</button>
       </Route>
       <Route path={`/admin/orders`}>
         <AdminPage>
