@@ -3,10 +3,10 @@ import axios from "axios";
 import store from "../store";
 import { OrdersActions } from "./OrdersActions";
 import { OrdersAction } from "./OrdersTypes";
+import { basicAuthorizedHeader } from "../../Api/Headers";
 
 export const fetchOrders = (count: number, page: number) => {
   return async (dispatch: Dispatch<OrdersAction>) => {
-    const { accessToken } = store.getState().user;
     const { filter } = store.getState().orders;
     dispatch({
       type: OrdersActions.ORDERS_DEFAULT,
@@ -14,10 +14,7 @@ export const fetchOrders = (count: number, page: number) => {
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/order?limit=${count}&page=${page}${filter}`,
       method: "GET",
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-        Authorization: `Bearer ${accessToken}`,
-      },
+      headers: basicAuthorizedHeader,
     })
       .then((response) => {
         dispatch({
