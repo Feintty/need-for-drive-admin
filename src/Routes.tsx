@@ -3,18 +3,23 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import AuthorizationPage from "./pages/AutorizationPage/AuthorizationPage";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "./hooks/useTypedSelector";
-import { checkIsUserExists } from "./store/User/UserActionCreators";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import OrdersTab from "./components/OrdersTab/OrdersTab";
+import { checkIsUserExists, exitUser } from "./store/User/UserActionCreators";
+import { selectUser } from "./store/selectors";
 
 const Routes = () => {
-  const { isLogged } = useTypedSelector((state) => state.user);
+  const { isLogged } = useTypedSelector(selectUser);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!isLogged) {
       dispatch(checkIsUserExists());
     }
   }, []);
+
+  const handleExitClick = () => {
+    dispatch(exitUser());
+  };
 
   return (
     <Switch>
@@ -25,8 +30,9 @@ const Routes = () => {
       <Route exact path="/auth">
         <AuthorizationPage />
       </Route>
-      <Route path={`/admin/orders/edit/:id`}>
-        <AdminPage>Редактирование заказа</AdminPage>
+      <Route path="/admin/orders">
+        <div>Вы уже авторизованы</div>
+        <button onClick={handleExitClick}>Выйти</button>
       </Route>
       <Route path={`/admin/orders`}>
         <AdminPage>
