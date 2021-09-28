@@ -1,6 +1,7 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import AuthorizationReducer from "./Authorization/AuthorizationReducer";
 import CarsReducer from "./Cars/CarsReducer";
+import CategoryReducer from "./Category/CategoryReducer";
 import CitiesReducer from "./Cities/CitiesReducer";
 import FilterReducer from "./Filter/FilterReducer";
 import OrdersReducer from "./Orders/OrdersReducer";
@@ -19,6 +20,7 @@ export const combinedReducers = combineReducers({
   filter: FilterReducer,
   cities: CitiesReducer,
   cars: CarsReducer,
+  category: CategoryReducer,
 });
 
 export type RootState = ReturnType<typeof combinedReducers>;

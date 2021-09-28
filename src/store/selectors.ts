@@ -11,3 +11,4 @@ export const selectOrders = (state: State) => state.orders;
 export const selectFilter = (state: State) => state.filter;
 export const selectCities = (state: State) => state.cities;
 export const selectCars = (state: State) => state.cars;
+export const selectCategory = (state: State) => state.category;

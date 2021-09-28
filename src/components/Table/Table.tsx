@@ -19,10 +19,14 @@ const Table: React.FC<ITable> = ({ data }) => {
   };
 
   const createTableData = () => {
-    return data.map((dataElement) => (
-      <tr className="table__body" key={`table-data-${dataElement}`}>
-        {Object.values(dataElement).map((value) => (
-          <td key={`table-data-${value}`} className="table__body-element">
+    return data.map((dataElement, i) => (
+      <tr className="table__body" key={`table-data-${dataElement}-${i}`}>
+        {Object.values(dataElement).map((value, id) => (
+          <td
+            data-label={Object.keys(data[0])[id]}
+            key={`table-data-${id}`}
+            className="table__body-element"
+          >
             {value}
           </td>
         ))}
@@ -32,8 +36,8 @@ const Table: React.FC<ITable> = ({ data }) => {
 
   return (
     <table className="table">
-      <thead>{createColumnHeaders()}</thead>
-      <tbody>{createTableData()}</tbody>
+      <thead className="table__main-head">{createColumnHeaders()}</thead>
+      <tbody className="table__main-body">{createTableData()}</tbody>
     </table>
   );
 };

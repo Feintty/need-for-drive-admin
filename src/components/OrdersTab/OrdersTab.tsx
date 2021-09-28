@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { fetchCars } from "../../store/Cars/CarsActionCreators";
 import { fetchCities } from "../../store/Cities/CitiesActionCreators";
@@ -24,6 +25,7 @@ import Filter from "../Filter/Filter";
 import SpinLoader from "../Loader/Loader";
 import OrderCard from "../OrderCard/OrderCard";
 import PagesBar from "../PagesBar/PagesBar";
+import Snackbar from "../Snackbar/Snackbar";
 import "./OrdersTab.scss";
 
 const OrdersTab: React.FC = () => {
@@ -131,9 +133,18 @@ const OrdersTab: React.FC = () => {
               >
                 Сбросить
               </button>
+              <Link to={`/admin/orders/new`}>
+                <button
+                  type="button"
+                  className="orders-tab__button button-correct"
+                >
+                  Добавить
+                </button>
+              </Link>
             </div>
           </div>
           <div className="orders-tab__orders">
+            <Snackbar snackbarId="orders" />
             {data ? dataToCards() : <SpinLoader />}
           </div>
           <PagesBar />

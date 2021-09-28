@@ -3,6 +3,8 @@ import axios from "axios";
 import store from "../store";
 import { OrdersActions } from "./OrdersActions";
 import { OrdersAction } from "./OrdersTypes";
+import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
+import errorCodeToMessage from "../../utils/errorCodeToMessage";
 import { basicAuthorizedHeader } from "../../Api/Headers";
 
 export const fetchOrders = (count: number, page: number) => {
@@ -31,6 +33,13 @@ export const fetchOrders = (count: number, page: number) => {
             type: OrdersActions.ORDERS_INIT_ERROR,
             payload: error.response.status.toString(),
           });
+          dispatch(
+            snackbarOpen(
+              "orders",
+              errorCodeToMessage(error.response.status.toString()),
+              "error"
+            ) as any
+          );
         }
       });
   };

@@ -1,21 +1,21 @@
 import { Dispatch } from "redux";
 import axios from "axios";
-import { CitiesActions } from "./CitiesActions";
+import { CategoryActions } from "./CategoryActions";
 import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
 import errorCodeToMessage from "../../utils/errorCodeToMessage";
 import { basicHeader } from "../../Api/Headers";
-import { CitiesAction } from "./CitiesTypes";
+import { CategoryAction } from "./CategoryTypes";
 
-export const fetchCities = () => {
-  return async (dispatch: Dispatch<CitiesAction>) => {
+export const fetchCategory = () => {
+  return async (dispatch: Dispatch<CategoryAction>) => {
     await axios({
-      baseURL: `${process.env.REACT_APP_API_URL}/db/city`,
+      baseURL: `${process.env.REACT_APP_API_URL}/db/category`,
       method: "GET",
       headers: basicHeader,
     })
       .then((response) => {
         dispatch({
-          type: CitiesActions.CITIES_INIT,
+          type: CategoryActions.CATEGORY_INIT,
           payload: {
             data: response.data.data,
             dataCount: response.data.count,
@@ -25,12 +25,12 @@ export const fetchCities = () => {
       .catch((error) => {
         if (error.response) {
           dispatch({
-            type: CitiesActions.CITIES_ERROR,
+            type: CategoryActions.CATEGORY_ERROR,
             payload: error.response.status.toString(),
           });
           dispatch(
             snackbarOpen(
-              "cities",
+              "category",
               errorCodeToMessage(error.response.status.toString()),
               "error"
             ) as any
