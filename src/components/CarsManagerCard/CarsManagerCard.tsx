@@ -1,8 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { setCarsManagerData } from "../../store/CarsManager/CarsManagerActionCreators";
-import { flatObject } from "../../utils/flatObject";
+import {
+  calculateProgress,
+  setCarsManagerData,
+} from "../../store/CarsManager/CarsManagerActionCreators";
+import { selectCarsManager } from "../../store/selectors";
 import { normalizeImgPath } from "../../utils/normalizeImgPath";
 import Input from "../Input/Input";
 import ProgressBar from "../ProgressBar/ProgressBar";
@@ -10,16 +14,8 @@ import "./CarsManagerCard.scss";
 
 const CarsManagerCard = () => {
   const dispatch = useDispatch();
-  const { data } = useTypedSelector((state) => state.carsManager);
-
-  const calculateProgress = () => {
-    const flatData = flatObject(data);
-    const count = Object.keys(flatData).length;
-    const correctCount = Object.values(flatData).filter(
-      (value) => value && value !== ""
-    ).length;
-    return Math.ceil((correctCount / count) * 100);
-  };
+  const { data } = useTypedSelector(selectCarsManager);
+  const { id } = useParams<{ id: string }>();
 
   const setCarsManagerDescription = (value: string) => {
     dispatch(setCarsManagerData({ description: value }));
@@ -68,7 +64,7 @@ const CarsManagerCard = () => {
         </label>
       </div>
       <div className="cars-manager-card__progress">
-        <ProgressBar progress={calculateProgress()} />
+        <ProgressBar progress={calculateProgress(!!id)} />
       </div>
       <div className="cars-manager-card__description">
         <Input

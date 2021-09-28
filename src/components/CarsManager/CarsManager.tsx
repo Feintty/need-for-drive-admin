@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -10,15 +11,29 @@ import {
   setCarsManagerId,
   updateCarsManagerData,
 } from "../../store/CarsManager/CarsManagerActionCreators";
+import { selectCars, selectCarsManager } from "../../store/selectors";
 import CarsManagerCard from "../CarsManagerCard/CarsManagerCard";
 import "./CarsManager.scss";
 import CarsManagerFields from "./CarsManagerFields";
 
 const CarsManager = () => {
   const { id } = useParams<{ id: string }>();
-  const carsData = useTypedSelector((state) => state.cars);
+  const carsData = useTypedSelector(selectCars);
   const history = useHistory();
   const dispatch = useDispatch();
+  const { data } = useTypedSelector(selectCarsManager);
+  const isCarsManagerFieldsCompleted =
+    !!data.name &&
+    !!data.priceMax &&
+    !!data.priceMin &&
+    data.colors.length > 0 &&
+    !!data.categoryId.id &&
+    (data.thumbnail.file !== null || data.thumbnail.path);
+
+  const saveButtonClass = classNames(
+    "cars-manager__button",
+    isCarsManagerFieldsCompleted ? "button-correct" : "button-disabled"
+  );
 
   useEffect(() => {
     dispatch(setCarsManagerDefault());
@@ -32,7 +47,7 @@ const CarsManager = () => {
           name: carById?.name,
           thumbnail: {
             path: carById?.thumbnail?.path,
-            name: carById?.thumbnail?.name,
+            name: carById?.thumbnail?.originalname,
           },
           description: carById?.description,
           categoryId: {
@@ -74,22 +89,19 @@ const CarsManager = () => {
           <h3 className="cars-manager__heading">Настройки автомобиля</h3>
           <CarsManagerFields />
           <div className="cars-manager__buttons">
-            <button
-              onClick={acceptClickHandler}
-              className="category-manager__button button-correct"
-            >
+            <button onClick={acceptClickHandler} className={saveButtonClass}>
               Сохранить
             </button>
             <button
               onClick={backClickHandler}
-              className="category-manager__button button-default"
+              className="cars-manager__button button-default"
             >
               Отмена
             </button>
             {id && (
               <button
                 onClick={deleteClickHandler}
-                className="category-manager__button button-alert"
+                className="cars-manager__button button-alert"
               >
                 Удалить
               </button>

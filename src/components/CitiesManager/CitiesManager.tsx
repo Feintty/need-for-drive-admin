@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -8,6 +9,7 @@ import {
   setCitiesManagerData,
   updateData,
 } from "../../store/CitiesManager/CitiesManagerActionCreators";
+import { selectCities, selectCitiesManager } from "../../store/selectors";
 import Input from "../Input/Input";
 import "./CitiesManager.scss";
 
@@ -15,8 +17,13 @@ const CitiesManager: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
   const dispatch = useDispatch();
-  const { data } = useTypedSelector((state) => state.citiesManager);
-  const citiesData = useTypedSelector((state) => state.cities);
+  const { data } = useTypedSelector(selectCitiesManager);
+  const citiesData = useTypedSelector(selectCities);
+
+  const saveButtonClass = classNames(
+    "cities-manager__button",
+    data.name ? "button-correct" : "button-disabled"
+  );
 
   useEffect(() => {
     if (id) {
@@ -64,10 +71,7 @@ const CitiesManager: React.FC = () => {
           value={data.name}
         />
         <div className="cities-manager__buttons">
-          <button
-            onClick={acceptClickHandler}
-            className="cities-manager__button button-correct"
-          >
+          <button onClick={acceptClickHandler} className={saveButtonClass}>
             Сохранить
           </button>
           <button

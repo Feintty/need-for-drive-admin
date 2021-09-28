@@ -20,7 +20,6 @@ export const login = (mail: string, password: string) => {
       headers: authorizationHeader,
     })
       .then((response) => {
-        console.log(typeof snackbarOpen);
         dispatch(
           snackbarOpen("snackbar-main", "Вы успешно вошли", "success") as any
         );

@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -9,6 +10,7 @@ import {
   setCategoryManagerId,
   updateCategoryData,
 } from "../../store/CategoryManager/CategoryManagerActionCreators";
+import { selectCategory, selectCategoryManager } from "../../store/selectors";
 import Input from "../Input/Input";
 import "./CategoryManager.scss";
 
@@ -16,8 +18,16 @@ const CategoryManager: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
   const dispatch = useDispatch();
-  const categoryManager = useTypedSelector((state) => state.categoryManager);
-  const categoryData = useTypedSelector((state) => state.category);
+  const categoryManager = useTypedSelector(selectCategoryManager);
+  const categoryData = useTypedSelector(selectCategory);
+
+  const isCategoryManagerFieldsCompleted =
+    categoryManager.data.description && categoryManager.data.name;
+
+  const saveButtonClass = classNames(
+    "category-manager__button",
+    isCategoryManagerFieldsCompleted ? "button-correct" : "button-disabled"
+  );
 
   useEffect(() => {
     if (id) {
@@ -83,10 +93,7 @@ const CategoryManager: React.FC = () => {
           value={categoryManager.data.description}
         />
         <div className="category-manager__buttons">
-          <button
-            onClick={acceptClickHandler}
-            className="category-manager__button button-correct"
-          >
+          <button onClick={acceptClickHandler} className={saveButtonClass}>
             Сохранить
           </button>
           <button

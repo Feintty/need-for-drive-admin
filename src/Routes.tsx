@@ -15,7 +15,6 @@ import OrdersManager from "./components/OrdersManager/OrdersManager";
 import { checkIsUserExists } from "./store/User/UserActionCreators";
 import { selectUser } from "./store/selectors";
 
-
 const Routes = () => {
   const { isLogged } = useTypedSelector(selectUser);
   const dispatch = useDispatch();

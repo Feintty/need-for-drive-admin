@@ -16,7 +16,7 @@ export const fetchOrders = (count: number, page: number) => {
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/order?limit=${count}&page=${page}${filter}`,
       method: "GET",
-      headers: basicAuthorizedHeader,
+      headers: basicAuthorizedHeader(),
     })
       .then((response) => {
         dispatch({

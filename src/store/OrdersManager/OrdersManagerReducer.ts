@@ -1,4 +1,4 @@
-import { OrdersManagerInitial } from "./OrderManagerInitial";
+import { OrdersManagerInitial } from "./OrdersManagerInitial";
 import { OrdersManagerActions } from "./OrdersManagerActions";
 import {
   IOrdersManagerInitial,

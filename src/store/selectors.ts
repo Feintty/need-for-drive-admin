@@ -12,3 +12,7 @@ export const selectFilter = (state: State) => state.filter;
 export const selectCities = (state: State) => state.cities;
 export const selectCars = (state: State) => state.cars;
 export const selectCategory = (state: State) => state.category;
+export const selectCarsManager = (state: State) => state.carsManager;
+export const selectCategoryManager = (state: State) => state.categoryManager;
+export const selectCitiesManager = (state: State) => state.citiesManager;
+export const selectOrdersManager = (state: State) => state.ordersManager;

@@ -3,6 +3,9 @@ import axios from "axios";
 import { CategoryManagerActions } from "./CategoryManagerActions";
 import store from "../store";
 import { CategoryManagerAction } from "./CategoryManagerTypes";
+import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
+import errorCodeToMessage from "../../utils/errorCodeToMessage";
+import { basicAuthorizedHeader } from "../../Api/Headers";
 
 export const setCategoryManagerData = (data: object) => {
   return (dispatch: Dispatch<CategoryManagerAction>) => {
@@ -24,72 +27,99 @@ export const setCategoryManagerId = (id: string) => {
 
 export const deleteCategoryData = () => {
   return async (dispatch: Dispatch<CategoryManagerAction>) => {
-    const { accessToken } = store.getState().user;
     const categoryManager = store.getState().categoryManager;
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/category/${categoryManager.id}`,
       method: "DELETE",
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }).catch((error) => {
-      if (error.response) {
-        dispatch({
-          type: CategoryManagerActions.CATEGORY_MANAGER_ERROR,
-          payload: error.response.status.toString(),
-        });
-      }
-    });
+      headers: basicAuthorizedHeader(),
+    })
+      .then(() => {
+        dispatch(
+          snackbarOpen("admin", "Операция выполнена успешно!", "success") as any
+        );
+      })
+      .catch((error) => {
+        if (error.response) {
+          dispatch({
+            type: CategoryManagerActions.CATEGORY_MANAGER_ERROR,
+            payload: error.response.status.toString(),
+          });
+          dispatch(
+            snackbarOpen(
+              "admin",
+              errorCodeToMessage(error.response.status.toString()),
+              "error"
+            ) as any
+          );
+        }
+      });
   };
 };
 
 export const updateCategoryData = () => {
   return async (dispatch: Dispatch<CategoryManagerAction>) => {
-    const { accessToken } = store.getState().user;
     const categoryManager = store.getState().categoryManager;
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/category/${categoryManager.id}`,
       method: "PUT",
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-        Authorization: `Bearer ${accessToken}`,
-      },
+      headers: basicAuthorizedHeader(),
       data: {
         ...categoryManager.data,
       },
-    }).catch((error) => {
-      if (error.response) {
-        dispatch({
-          type: CategoryManagerActions.CATEGORY_MANAGER_ERROR,
-          payload: error.response.status.toString(),
-        });
-      }
-    });
+    })
+      .then(() => {
+        dispatch(
+          snackbarOpen("admin", "Операция выполнена успешно!", "success") as any
+        );
+      })
+      .catch((error) => {
+        if (error.response) {
+          dispatch({
+            type: CategoryManagerActions.CATEGORY_MANAGER_ERROR,
+            payload: error.response.status.toString(),
+          });
+          dispatch(
+            snackbarOpen(
+              "admin",
+              errorCodeToMessage(error.response.status.toString()),
+              "error"
+            ) as any
+          );
+        }
+      });
   };
 };
 
 export const addCategoryData = () => {
   return async (dispatch: Dispatch<CategoryManagerAction>) => {
-    const { accessToken } = store.getState().user;
     const categoryManager = store.getState().categoryManager;
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/category`,
       method: "POST",
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-        Authorization: `Bearer ${accessToken}`,
-      },
+      headers: basicAuthorizedHeader(),
       data: {
         ...categoryManager.data,
       },
-    }).catch((error) => {
-      if (error.response) {
-        dispatch({
-          type: CategoryManagerActions.CATEGORY_MANAGER_ERROR,
-          payload: error.response.status.toString(),
-        });
-      }
-    });
+    })
+      .then(() => {
+        dispatch(
+          snackbarOpen("admin", "Операция выполнена успешно!", "success") as any
+        );
+      })
+      .catch((error) => {
+        if (error.response) {
+          dispatch({
+            type: CategoryManagerActions.CATEGORY_MANAGER_ERROR,
+            payload: error.response.status.toString(),
+          });
+          dispatch(
+            snackbarOpen(
+              "admin",
+              errorCodeToMessage(error.response.status.toString()),
+              "error"
+            ) as any
+          );
+        }
+      });
   };
 };

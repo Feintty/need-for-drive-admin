@@ -3,6 +3,10 @@ import axios from "axios";
 import { CarsManagerActions } from "./CarsManagerActions";
 import store from "../store";
 import { CarsManagerAction } from "./CarsManagerTypes";
+import { basicAuthorizedHeader } from "../../Api/Headers";
+import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
+import errorCodeToMessage from "../../utils/errorCodeToMessage";
+import { flatObject } from "../../utils/flatObject";
 
 const carsManagerDataToFormData = () => {
   const { data } = store.getState().carsManager;
@@ -47,70 +51,121 @@ export const setCarsManagerDefault = () => {
 
 export const deleteCarsMangerData = () => {
   return async (dispatch: Dispatch<CarsManagerAction>) => {
-    const { accessToken } = store.getState().user;
     const carsManager = store.getState().carsManager;
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/car/${carsManager.id}`,
       method: "DELETE",
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }).catch((error) => {
-      if (error.response) {
-        dispatch({
-          type: CarsManagerActions.CARS_MANAGER_ERROR,
-          payload: error.response.status.toString(),
-        });
-      }
-    });
+      headers: basicAuthorizedHeader(),
+    })
+      .then(() => {
+        dispatch(
+          snackbarOpen("admin", "Операция выполнена успешно!", "success") as any
+        );
+      })
+      .catch((error) => {
+        if (error.response) {
+          dispatch({
+            type: CarsManagerActions.CARS_MANAGER_ERROR,
+            payload: error.response.status.toString(),
+          });
+          dispatch(
+            snackbarOpen(
+              "admin",
+              errorCodeToMessage(error.response.status.toString()),
+              "error"
+            ) as any
+          );
+        }
+      });
   };
 };
 
 export const updateCarsManagerData = () => {
   return async (dispatch: Dispatch<CarsManagerAction>) => {
-    const { accessToken } = store.getState().user;
     const carsManager = store.getState().carsManager;
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/car/${carsManager.id}`,
       method: "PUT",
       headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-        Authorization: `Bearer ${accessToken}`,
+        ...basicAuthorizedHeader(),
         "Content-Type": "multipart/form-data",
       },
       data: carsManagerDataToFormData(),
-    }).catch((error) => {
-      if (error.response) {
-        dispatch({
-          type: CarsManagerActions.CARS_MANAGER_ERROR,
-          payload: error.response.status.toString(),
-        });
-        console.log(error.response);
-      }
-    });
+    })
+      .then(() => {
+        dispatch(
+          snackbarOpen("admin", "Операция выполнена успешно!", "success") as any
+        );
+      })
+      .catch((error) => {
+        if (error.response) {
+          dispatch({
+            type: CarsManagerActions.CARS_MANAGER_ERROR,
+            payload: error.response.status.toString(),
+          });
+          dispatch(
+            snackbarOpen(
+              "admin",
+              errorCodeToMessage(error.response.status.toString()),
+              "error"
+            ) as any
+          );
+        }
+      });
   };
 };
 
 export const addCarsManagerData = () => {
   return async (dispatch: Dispatch<CarsManagerAction>) => {
-    const { accessToken } = store.getState().user;
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/car`,
       method: "POST",
       headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-        Authorization: `Bearer ${accessToken}`,
+        ...basicAuthorizedHeader(),
         "Content-Type": "multipart/form-data",
       },
       data: carsManagerDataToFormData(),
-    }).catch((error) => {
-      if (error.response) {
-        dispatch({
-          type: CarsManagerActions.CARS_MANAGER_ERROR,
-          payload: error.response.status.toString(),
-        });
-      }
-    });
+    })
+      .then(() => {
+        dispatch(
+          snackbarOpen("admin", "Операция выполнена успешно!", "success") as any
+        );
+      })
+      .catch((error) => {
+        if (error.response) {
+          dispatch({
+            type: CarsManagerActions.CARS_MANAGER_ERROR,
+            payload: error.response.status.toString(),
+          });
+          dispatch(
+            snackbarOpen(
+              "admin",
+              errorCodeToMessage(error.response.status.toString()),
+              "error"
+            ) as any
+          );
+        }
+      });
   };
+};
+
+export const calculateProgress = (isNewCar: boolean) => {
+  const { data } = store.getState().carsManager;
+  const flatData = flatObject(data);
+  const fields: Array<boolean> = [];
+  Object.entries(flatData).forEach(([key, value]) => {
+    switch (key) {
+      case "colors":
+        fields.push(Array.isArray(value) && value.length > 0);
+        break;
+      case "file":
+        fields.push(isNewCar ? !!value : true);
+        break;
+      default:
+        fields.push(!!value);
+    }
+  });
+  const count = fields.length;
+  const correctCount = fields.filter((value) => !!value).length;
+  return Math.ceil((correctCount / count) * 100);
 };

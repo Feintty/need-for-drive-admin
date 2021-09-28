@@ -3,6 +3,9 @@ import axios from "axios";
 import { CitiesManagerActions } from "./CitiesManagerActions";
 import { CitiesManagerAction } from "./CitiesManagerTypes";
 import store from "../store";
+import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
+import errorCodeToMessage from "../../utils/errorCodeToMessage";
+import { basicAuthorizedHeader } from "../../Api/Headers";
 
 export const setCitiesManagerData = (data: object) => {
   return (dispatch: Dispatch<CitiesManagerAction>) => {
@@ -15,72 +18,99 @@ export const setCitiesManagerData = (data: object) => {
 
 export const deleteData = () => {
   return async (dispatch: Dispatch<CitiesManagerAction>) => {
-    const { accessToken } = store.getState().user;
     const { data } = store.getState().citiesManager;
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/city/${data.id}`,
       method: "DELETE",
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }).catch((error) => {
-      if (error.response) {
-        dispatch({
-          type: CitiesManagerActions.CITIES_MANAGER_ERROR,
-          payload: error.response.status.toString(),
-        });
-      }
-    });
+      headers: basicAuthorizedHeader(),
+    })
+      .then(() => {
+        dispatch(
+          snackbarOpen("admin", "Операция выполнена успешно!", "success") as any
+        );
+      })
+      .catch((error) => {
+        if (error.response) {
+          dispatch({
+            type: CitiesManagerActions.CITIES_MANAGER_ERROR,
+            payload: error.response.status.toString(),
+          });
+          dispatch(
+            snackbarOpen(
+              "admin",
+              errorCodeToMessage(error.response.status.toString()),
+              "error"
+            ) as any
+          );
+        }
+      });
   };
 };
 
 export const updateData = () => {
   return async (dispatch: Dispatch<CitiesManagerAction>) => {
-    const { accessToken } = store.getState().user;
     const { data } = store.getState().citiesManager;
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/city/${data.id}`,
       method: "PUT",
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-        Authorization: `Bearer ${accessToken}`,
-      },
+      headers: basicAuthorizedHeader(),
       data: {
         name: data.name,
       },
-    }).catch((error) => {
-      if (error.response) {
-        dispatch({
-          type: CitiesManagerActions.CITIES_MANAGER_ERROR,
-          payload: error.response.status.toString(),
-        });
-      }
-    });
+    })
+      .then(() => {
+        dispatch(
+          snackbarOpen("admin", "Операция выполнена успешно!", "success") as any
+        );
+      })
+      .catch((error) => {
+        if (error.response) {
+          dispatch({
+            type: CitiesManagerActions.CITIES_MANAGER_ERROR,
+            payload: error.response.status.toString(),
+          });
+          dispatch(
+            snackbarOpen(
+              "admin",
+              errorCodeToMessage(error.response.status.toString()),
+              "error"
+            ) as any
+          );
+        }
+      });
   };
 };
 
 export const addData = () => {
   return async (dispatch: Dispatch<CitiesManagerAction>) => {
-    const { accessToken } = store.getState().user;
     const { data } = store.getState().citiesManager;
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/city`,
       method: "POST",
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-        Authorization: `Bearer ${accessToken}`,
-      },
+      headers: basicAuthorizedHeader(),
       data: {
         name: data.name,
       },
-    }).catch((error) => {
-      if (error.response) {
-        dispatch({
-          type: CitiesManagerActions.CITIES_MANAGER_ERROR,
-          payload: error.response.status.toString(),
-        });
-      }
-    });
+    })
+      .then(() => {
+        dispatch(
+          snackbarOpen("admin", "Операция выполнена успешно!", "success") as any
+        );
+      })
+      .catch((error) => {
+        if (error.response) {
+          dispatch({
+            type: CitiesManagerActions.CITIES_MANAGER_ERROR,
+            payload: error.response.status.toString(),
+          });
+          dispatch(
+            snackbarOpen(
+              "admin",
+              errorCodeToMessage(error.response.status.toString()),
+              "error"
+            ) as any
+          );
+        }
+      });
   };
 };

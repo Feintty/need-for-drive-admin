@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { setCarsManagerData } from "../../store/CarsManager/CarsManagerActionCreators";
+import { selectCarsManager, selectCategory } from "../../store/selectors";
 import Filter from "../Filter/Filter";
 import Input from "../Input/Input";
 
 const CarsManagerFields = () => {
-  const { data } = useTypedSelector((state) => state.carsManager);
-  const categoryData = useTypedSelector((state) => state.category);
+  const { data } = useTypedSelector(selectCarsManager);
+  const categoryData = useTypedSelector(selectCategory);
   const [newColor, setNewColor] = useState("");
   const dispatch = useDispatch();
   const setCarsManagerName = (value: string) => {
@@ -104,8 +105,8 @@ const CarsManagerFields = () => {
         value={data.priceMin.toString()}
       />
       <Input
-        description="Модель"
-        placeholder="Введите название модели..."
+        description="Максимальная цена"
+        placeholder="Введите максимальную цену..."
         type="text"
         setter={setCarsManagerPriceMax}
         isCorrect={true}

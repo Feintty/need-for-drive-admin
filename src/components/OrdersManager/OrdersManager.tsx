@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -8,6 +9,7 @@ import {
   setOrdersManagerId,
   updateOrdersManagerData,
 } from "../../store/OrdersManager/OrdersManagerActionCreators";
+import { selectOrders, selectOrdersManager } from "../../store/selectors";
 import Input from "../Input/Input";
 import "./OrdersManager.scss";
 
@@ -15,9 +17,13 @@ const OrdersManager: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
   const dispatch = useDispatch();
-  const ordersData = useTypedSelector((state) => state.orders);
-  const { data } = useTypedSelector((state) => state.ordersManager);
-
+  const ordersData = useTypedSelector(selectOrders);
+  const { data } = useTypedSelector(selectOrdersManager);
+  const isOrderManagerFieldsCompleted = data.price;
+  const saveButtonClass = classNames(
+    "category-manager__button",
+    isOrderManagerFieldsCompleted ? "button-correct" : "button-disabled"
+  );
   useEffect(() => {
     const orderById = ordersData.data?.find((el) => el.id === id);
     dispatch(setOrdersManagerId(id));
@@ -114,10 +120,7 @@ const OrdersManager: React.FC = () => {
           </label>
         </div>
         <div className="orders-manager__buttons">
-          <button
-            onClick={acceptClickHandler}
-            className="orders-manager__button button-correct"
-          >
+          <button onClick={acceptClickHandler} className={saveButtonClass}>
             Сохранить
           </button>
           <button

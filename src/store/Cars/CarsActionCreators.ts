@@ -31,7 +31,7 @@ export const fetchCars = () => {
           });
           dispatch(
             snackbarOpen(
-              "cars",
+              "admin",
               errorCodeToMessage(error.response.status.toString()),
               "error"
             ) as any
@@ -69,7 +69,7 @@ export const fetchCarsFiltered = (count: number, page: number) => {
           });
           dispatch(
             snackbarOpen(
-              "cars",
+              "admin",
               errorCodeToMessage(error.response.status.toString()),
               "error"
             ) as any
