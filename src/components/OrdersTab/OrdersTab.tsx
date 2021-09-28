@@ -12,6 +12,12 @@ import {
   pagesBarInitCalculated,
   pagesBarSetCurrent,
 } from "../../store/PagesBar/PagesBarActionCreators";
+import {
+  selectCars,
+  selectCities,
+  selectOrders,
+  selectPagesBar,
+} from "../../store/selectors";
 import { dataToUniqueKeyValue } from "../../utils/dataToUniqueKeyValue";
 import { getDateData, getStatusData } from "../../utils/filterData";
 import Filter from "../Filter/Filter";
@@ -23,10 +29,10 @@ import "./OrdersTab.scss";
 
 const OrdersTab: React.FC = () => {
   const dispatch = useDispatch();
-  const { data, dataCount } = useTypedSelector((state) => state.orders);
-  const { currentPage } = useTypedSelector((state) => state.pages);
-  const cities = useTypedSelector((state) => state.cities);
-  const cars = useTypedSelector((state) => state.cars);
+  const { data, dataCount } = useTypedSelector(selectOrders);
+  const { currentPage } = useTypedSelector(selectPagesBar);
+  const cities = useTypedSelector(selectCities);
+  const cars = useTypedSelector(selectCars);
   const countInPage = 6;
 
   useEffect(() => {

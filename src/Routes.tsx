@@ -3,7 +3,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import AuthorizationPage from "./pages/AutorizationPage/AuthorizationPage";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "./hooks/useTypedSelector";
-import { checkIsUserExists } from "./store/User/UserActionCreators";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import OrdersTab from "./components/OrdersTab/OrdersTab";
 import CarsTab from "./components/CarsTab/CarsTab";
@@ -13,9 +12,12 @@ import CitiesManager from "./components/CitiesManager/CitiesManager";
 import CategoryManager from "./components/CategoryManager/CategoryManager";
 import CarsManager from "./components/CarsManager/CarsManager";
 import OrdersManager from "./components/OrdersManager/OrdersManager";
+import { checkIsUserExists } from "./store/User/UserActionCreators";
+import { selectUser } from "./store/selectors";
+
 
 const Routes = () => {
-  const { isLogged } = useTypedSelector((state) => state.user);
+  const { isLogged } = useTypedSelector(selectUser);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!isLogged) {

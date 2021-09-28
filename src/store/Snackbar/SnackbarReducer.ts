@@ -19,13 +19,15 @@ const SnackbarReducer = (
       return {
         ...initialSnackbar,
         isOpened: true,
-        ...action.payload,
+        id: action.payload.id,
+        message: action.payload.message,
+        type: action.payload.type,
       };
     case SnackbarActions.SNACKBAR_CLOSE:
       return {
         ...initialSnackbar,
         isOpened: false,
-        ...action.payload,
+        id: action.payload.id,
       };
     default:
       return state;

@@ -12,6 +12,11 @@ import {
   pagesBarInitCalculated,
   pagesBarSetCurrent,
 } from "../../store/PagesBar/PagesBarActionCreators";
+import {
+  selectCars,
+  selectCategory,
+  selectPagesBar,
+} from "../../store/selectors";
 import { normalizeImgPath } from "../../utils/normalizeImgPath";
 import Filter from "../Filter/Filter";
 import SpinLoader from "../Loader/Loader";
@@ -21,10 +26,10 @@ import Table from "../Table/Table";
 import "./CarsTab.scss";
 
 const CarsTab = () => {
-  const { dataFiltered, dataCount } = useTypedSelector((state) => state.cars);
-  const category = useTypedSelector((state) => state.category);
+  const { dataFiltered, dataCount } = useTypedSelector(selectCars);
+  const category = useTypedSelector(selectCategory);
   const dispatch = useDispatch();
-  const { currentPage } = useTypedSelector((state) => state.pages);
+  const { currentPage } = useTypedSelector(selectPagesBar);
   const countInPage = 8;
 
   useEffect(() => {

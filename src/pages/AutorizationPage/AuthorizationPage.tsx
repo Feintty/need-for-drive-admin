@@ -7,6 +7,7 @@ import {
   setMail,
   setPassword,
 } from "../../store/Authorization/AuthorizationActionCreators";
+import { selectAuth } from "../../store/selectors";
 import { login } from "../../store/User/UserActionCreators";
 import "./AuthorizationPage.scss";
 
@@ -14,7 +15,7 @@ const classNames = require("classnames");
 
 const AuthorizationPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { mail, password } = useTypedSelector((state) => state.auth);
+  const { mail, password } = useTypedSelector(selectAuth);
 
   const buttonClass = classNames(
     "authorization__login",
