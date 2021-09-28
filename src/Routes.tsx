@@ -3,15 +3,16 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import AuthorizationPage from "./pages/AutorizationPage/AuthorizationPage";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "./hooks/useTypedSelector";
-import { checkIsUserExists } from "./store/User/UserActionCreators";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import OrdersTab from "./components/OrdersTab/OrdersTab";
 import CarsTab from "./components/CarsTab/CarsTab";
 import CategoryTab from "./components/CategoryTab/CategoryTab";
 import CitiesTab from "./components/CitiesTab/CitiesTab";
+import { checkIsUserExists } from "./store/User/UserActionCreators";
+import { selectUser } from "./store/selectors";
 
 const Routes = () => {
-  const { isLogged } = useTypedSelector((state) => state.user);
+  const { isLogged } = useTypedSelector(selectUser);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!isLogged) {
@@ -27,9 +28,6 @@ const Routes = () => {
       />
       <Route exact path="/auth">
         <AuthorizationPage />
-      </Route>
-      <Route path={`/admin/orders/edit/:id`}>
-        <AdminPage>Редактирование заказа</AdminPage>
       </Route>
       <Route path={`/admin/orders`}>
         <AdminPage>

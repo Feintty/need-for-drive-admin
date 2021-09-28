@@ -3,15 +3,15 @@ import axios from "axios";
 import { CategoryActions } from "./CategoryActions";
 import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
 import errorCodeToMessage from "../../utils/errorCodeToMessage";
+import { basicHeader } from "../../Api/Headers";
+import { CategoryAction } from "./CategoryTypes";
 
 export const fetchCategory = () => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch<CategoryAction>) => {
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/category`,
       method: "GET",
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-      },
+      headers: basicHeader,
     })
       .then((response) => {
         dispatch({
@@ -33,7 +33,7 @@ export const fetchCategory = () => {
               "category",
               errorCodeToMessage(error.response.status.toString()),
               "error"
-            )
+            ) as any
           );
         }
       });
