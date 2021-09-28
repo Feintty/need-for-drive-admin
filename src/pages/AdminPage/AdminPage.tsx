@@ -1,4 +1,5 @@
 import React from "react";
+import ErrorBoundary from "../../components/ErrorTab/ErrorBoundary";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
@@ -9,9 +10,11 @@ const AdminPage: React.FC = ({ children }) => {
     <div className="admin-page">
       <Sidebar />
       <div className="admin-page__content">
-        <Header />
-        <div className="admin-page__tab">{children}</div>
-        <Footer />
+        <ErrorBoundary>
+          <Header />
+          <div className="admin-page__tab">{children}</div>
+          <Footer />
+        </ErrorBoundary>
       </div>
     </div>
   );
