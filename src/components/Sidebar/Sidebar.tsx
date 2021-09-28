@@ -11,12 +11,13 @@ import {
 import sidebarData from "./SidebarData";
 import classNames from "classnames";
 import Burger from "../../assets/icons/sidebar-burger.svg";
+import { selectSidebar } from "../../store/selectors";
 
 const Sidebar: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isHiding, setIsHiding] = useState(true);
-  const { elements } = useTypedSelector((state) => state.sidebar);
+  const { elements } = useTypedSelector(selectSidebar);
 
   const elementsClass = classNames({
     sidebar__elements: true,

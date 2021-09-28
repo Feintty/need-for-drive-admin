@@ -5,15 +5,14 @@ import { CarsActions } from "./CarsActions";
 import store from "../store";
 import errorCodeToMessage from "../../utils/errorCodeToMessage";
 import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
+import { basicHeader } from "../../Api/Headers";
 
 export const fetchCars = () => {
   return async (dispatch: Dispatch<any>) => {
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/car`,
       method: "GET",
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-      },
+      headers: basicHeader,
     })
       .then((response) => {
         dispatch({
