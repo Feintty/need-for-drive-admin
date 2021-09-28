@@ -3,7 +3,9 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import AuthorizationPage from "./pages/AutorizationPage/AuthorizationPage";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "./hooks/useTypedSelector";
-import { checkIsUserExists, exitUser } from "./store/User/UserActionCreators";
+import AdminPage from "./pages/AdminPage/AdminPage";
+import OrdersTab from "./components/OrdersTab/OrdersTab";
+import { checkIsUserExists } from "./store/User/UserActionCreators";
 import { selectUser } from "./store/selectors";
 
 const Routes = () => {
@@ -15,24 +17,28 @@ const Routes = () => {
     }
   }, []);
 
-  const handleExitClick = () => {
-    dispatch(exitUser());
-  };
-
   return (
     <Switch>
       <Redirect
-        from={isLogged ? "/auth" : "/admin/*"}
+        from={isLogged ? "/auth" : "/admin"}
         to={isLogged ? "/admin/orders" : "/auth"}
       />
-      <Route path="/auth">
+      <Route exact path="/auth">
         <AuthorizationPage />
       </Route>
-      <Route path="/admin/orders">
-        <div>Вы уже авторизованы</div>
-        <button onClick={handleExitClick}>Выйти</button>
+      <Route path={`/admin/orders`}>
+        <AdminPage>
+          <OrdersTab />
+        </AdminPage>
       </Route>
-      <Redirect from="/" to="/auth" />
+      <Route path={`/admin/cars`}>
+        <AdminPage>Автомобили</AdminPage>
+      </Route>
+      <Redirect from="/" to={isLogged ? "/admin/orders" : "/auth"} />
+      <Route path={`/admin/404`}>
+        <AdminPage>Ошибка</AdminPage>
+      </Route>
+      <Redirect to="/admin/404" />
     </Switch>
   );
 };

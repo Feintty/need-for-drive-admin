@@ -1,0 +1,5 @@
+export enum SidebarActions {
+  SIDEBAR_INIT = "SIDEBAR_INIT",
+  SIDEBAR_ADD = "SIDEBAR_ADD",
+  SIDEBAR_SET_ACTIVE = "SIDEBAR_SET_ACTIVE",
+}

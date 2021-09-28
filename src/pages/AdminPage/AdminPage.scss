@@ -1,0 +1,25 @@
+@import "../../style/local.scss";
+
+.admin-page {
+  @include flex-row;
+  width: 100%;
+  height:100vh;
+  &__content {
+    @include flex-column;
+    width: 100%;
+  }
+  &__tab{
+    padding: 28px;
+    flex-grow: 1;
+  }
+  animation: fadein 1s;
+}
+
+@keyframes fadein{
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
+}

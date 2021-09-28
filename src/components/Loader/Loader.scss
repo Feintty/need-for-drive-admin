@@ -1,0 +1,6 @@
+@import "../../style/local.scss";
+.spin-loader{
+    height:100%;
+    width:100%;
+    @include flex-column-center;
+}

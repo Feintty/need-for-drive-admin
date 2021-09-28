@@ -1,0 +1,66 @@
+@import "../../style/local.scss";
+
+.dropdown-filter {
+  position: relative;
+  width: 120px;
+  height: fit-content;
+  padding: 8px 21px 8px 14px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 13px;
+  letter-spacing: -0.345714px;
+  border: 0.5px solid $gray-dark;
+  border-radius: 4px;
+  color: $color-dropdown-text;
+  background: $white;
+  user-select: none;
+  &__head {
+    cursor: pointer;
+  }
+
+  &__list {
+    position: absolute;
+    top: 100%;
+    left: -1px;
+    border: 0.5px solid $gray-dark;
+    border-radius: 4px;
+    width: calc(100% + 2px);
+    background: $white;
+    padding: 0;
+    animation: fadein 0.5s;
+    max-height: 170px;
+    overflow-y: scroll;
+    z-index: 5;
+  }
+
+  &__element {
+    padding: 8px 14px;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover{
+        color:$blue;
+    }
+  }
+
+  &__element:not(:last-child) {
+    border-bottom: 1px solid $gray-dark;
+  }
+
+  &::before {
+    content: "\25B2";
+    top: 5px;
+  }
+  &::after {
+    content: "\25BC";
+    top: 12px;
+  }
+  &::before,
+  &::after {
+    color: $black;
+    position: absolute;
+    right: 8px;
+    font-size: 6px;
+  }
+}

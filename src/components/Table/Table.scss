@@ -1,0 +1,15 @@
+@import "../../style/local.scss";
+
+.table {
+  width: 100%;
+  font-size: 12px;
+  line-height: 14px;
+  font-style: normal;
+    color:$color-gray-alt;
+
+  &__header {
+    font-weight: bold;
+    letter-spacing: -0.377143px;
+    color: $text-color;
+  }
+}
