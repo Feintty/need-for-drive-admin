@@ -38,12 +38,28 @@
         height: 100%;
       }
     
-      &__categories {
+      &__cities {
         @include flex-column;
         justify-content: space-between;
         padding-top:15px;
         flex-grow: 1;
-        height: 100%;
+        height: 500px;
+        overflow-y: scroll;
+        padding-right: 20px;
+        &::-webkit-scrollbar {
+          width: 10px;
+        }
+      
+        &::-webkit-scrollbar-track {
+          width: 20px;
+        }
+      
+        &::-webkit-scrollbar-thumb {
+          background-color: $gray;
+          border: 2px solid transparent;
+          border-radius: 2px;
+          background-clip: content-box;
+        }
       }
       
       &__change{

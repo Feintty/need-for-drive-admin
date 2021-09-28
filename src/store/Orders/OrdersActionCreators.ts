@@ -5,10 +5,10 @@ import { OrdersActions } from "./OrdersActions";
 import { OrdersAction } from "./OrdersTypes";
 import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
 import errorCodeToMessage from "../../utils/errorCodeToMessage";
+import { basicAuthorizedHeader } from "../../Api/Headers";
 
 export const fetchOrders = (count: number, page: number) => {
-  return async (dispatch: Dispatch<any>) => {
-    const { accessToken } = store.getState().user;
+  return async (dispatch: Dispatch<OrdersAction>) => {
     const { filter } = store.getState().orders;
     dispatch({
       type: OrdersActions.ORDERS_DEFAULT,
@@ -16,10 +16,7 @@ export const fetchOrders = (count: number, page: number) => {
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/order?limit=${count}&page=${page}${filter}`,
       method: "GET",
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-        Authorization: `Bearer ${accessToken}`,
-      },
+      headers: basicAuthorizedHeader,
     })
       .then((response) => {
         dispatch({
@@ -41,7 +38,7 @@ export const fetchOrders = (count: number, page: number) => {
               "orders",
               errorCodeToMessage(error.response.status.toString()),
               "error"
-            )
+            ) as any
           );
         }
       });

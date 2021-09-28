@@ -5,9 +5,10 @@ import cookies from "react-cookies";
 import axios from "axios";
 import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
 import errorCodeToMessage from "../../utils/errorCodeToMessage";
+import { authorizationHeader } from "../../Api/Headers";
 
 export const login = (mail: string, password: string) => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch<UserAction>) => {
     await dispatch({ type: UserActions.USER_DEFAULT });
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/auth/login/`,
@@ -16,13 +17,13 @@ export const login = (mail: string, password: string) => {
         username: mail,
         password: password,
       },
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-        Authorization: process.env.REACT_APP_AUTHORIZATION_KEY,
-      },
+      headers: authorizationHeader,
     })
       .then((response) => {
-        dispatch(snackbarOpen("snackbar-main", "Вы успешно вошли", "success"));
+        console.log(typeof snackbarOpen);
+        dispatch(
+          snackbarOpen("snackbar-main", "Вы успешно вошли", "success") as any
+        );
         cookies.save(
           "userData",
           {
@@ -49,7 +50,7 @@ export const login = (mail: string, password: string) => {
             "snackbar-main",
             errorCodeToMessage(error.response.status.toString()),
             "error"
-          )
+          ) as any
         );
       });
   };

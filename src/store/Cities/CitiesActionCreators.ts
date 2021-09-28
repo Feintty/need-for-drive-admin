@@ -3,15 +3,15 @@ import axios from "axios";
 import { CitiesActions } from "./CitiesActions";
 import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
 import errorCodeToMessage from "../../utils/errorCodeToMessage";
+import { basicHeader } from "../../Api/Headers";
+import { CitiesAction } from "./CitiesTypes";
 
 export const fetchCities = () => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch<CitiesAction>) => {
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/city`,
       method: "GET",
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-      },
+      headers: basicHeader,
     })
       .then((response) => {
         dispatch({
@@ -33,7 +33,7 @@ export const fetchCities = () => {
               "cities",
               errorCodeToMessage(error.response.status.toString()),
               "error"
-            )
+            ) as any
           );
         }
       });

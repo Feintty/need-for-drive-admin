@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { fetchCities } from "../../store/Cities/CitiesActionCreators";
+import { selectCities } from "../../store/selectors";
 import SpinLoader from "../Loader/Loader";
 import Snackbar from "../Snackbar/Snackbar";
 import Table from "../Table/Table";
@@ -10,7 +11,7 @@ import "./CitiesTab.scss";
 
 const CitiesTab: React.FC = () => {
   const dispatch = useDispatch();
-  const { data } = useTypedSelector((state) => state.cities);
+  const { data } = useTypedSelector(selectCities);
 
   useEffect(() => {
     dispatch(fetchCities());
@@ -32,7 +33,7 @@ const CitiesTab: React.FC = () => {
             </Link>
           </div>
         </div>
-        <div className="cities-tab__categories">
+        <div className="cities-tab__cities">
           <Snackbar snackbarId="cities" />
           {data ? (
             <Table

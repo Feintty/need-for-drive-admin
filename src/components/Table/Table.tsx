@@ -19,12 +19,12 @@ const Table: React.FC<ITable> = ({ data }) => {
   };
 
   const createTableData = () => {
-    return data.map((dataElement) => (
-      <tr className="table__body" key={`table-data-${dataElement}`}>
+    return data.map((dataElement, i) => (
+      <tr className="table__body" key={`table-data-${dataElement}-${i}`}>
         {Object.values(dataElement).map((value, id) => (
           <td
             data-label={Object.keys(data[0])[id]}
-            key={`table-data-${value}-${id}`}
+            key={`table-data-${id}`}
             className="table__body-element"
           >
             {value}

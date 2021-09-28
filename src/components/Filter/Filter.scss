@@ -1,20 +1,48 @@
 @import "../../style/local.scss";
 
 .dropdown-filter {
-  position: relative;
-  width: 120px;
-  height: fit-content;
-  padding: 8px 21px 8px 14px;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 11px;
-  line-height: 13px;
-  letter-spacing: -0.345714px;
-  border: 0.5px solid $gray-dark;
-  border-radius: 4px;
-  color: $color-dropdown-text;
-  background: $white;
-  user-select: none;
+  &__body{
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    padding: 8px 21px 8px 14px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 13px;
+    letter-spacing: -0.345714px;
+    border: 0.5px solid $gray-dark;
+    border-radius: 4px;
+    color: $color-dropdown-text;
+    background: $white;
+    user-select: none;
+
+    &::before {
+      content: "\25B2";
+      top: 5px;
+    }
+    &::after {
+      content: "\25BC";
+      top: 12px;
+    }
+    &::before,
+    &::after {
+      color: $black;
+      position: absolute;
+      right: 8px;
+      font-size: 6px;
+    }
+  }
+
+  &__description{
+    margin-bottom: 8.5px;
+    font-weight: normal;
+    font-size: 10.5px;
+    line-height: 12px;
+    letter-spacing: -0.18421px;
+    color:$text-color-alt;
+  }
+
   &__head {
     cursor: pointer;
   }
@@ -46,21 +74,5 @@
 
   &__element:not(:last-child) {
     border-bottom: 1px solid $gray-dark;
-  }
-
-  &::before {
-    content: "\25B2";
-    top: 5px;
-  }
-  &::after {
-    content: "\25BC";
-    top: 12px;
-  }
-  &::before,
-  &::after {
-    color: $black;
-    position: absolute;
-    right: 8px;
-    font-size: 6px;
   }
 }

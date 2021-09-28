@@ -7,6 +7,7 @@ import {
   setMail,
   setPassword,
 } from "../../store/Authorization/AuthorizationActionCreators";
+import { selectAuth } from "../../store/selectors";
 import { login } from "../../store/User/UserActionCreators";
 import "./AuthorizationPage.scss";
 
@@ -14,7 +15,7 @@ const classNames = require("classnames");
 
 const AuthorizationPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { mail, password } = useTypedSelector((state) => state.auth);
+  const { mail, password } = useTypedSelector(selectAuth);
 
   const buttonClass = classNames(
     "authorization__login",
@@ -28,6 +29,14 @@ const AuthorizationPage: React.FC = () => {
 
   const onLoginClick = (): void => {
     dispatch(login(mail.value, password.value));
+  };
+
+  const mailSetter = (mailValue: string) => {
+    dispatch(setMail(mailValue));
+  };
+
+  const passwordSetter = (passwordValue: string) => {
+    dispatch(setPassword(passwordValue));
   };
 
   return (
@@ -44,15 +53,17 @@ const AuthorizationPage: React.FC = () => {
               description="Почта"
               placeholder="Введите почту"
               type="text"
-              setter={setMail}
+              setter={mailSetter}
               isCorrect={mail.isCorrect}
+              value={mail.value}
             />
             <Input
               description="Пароль"
               placeholder="Введите пароль"
               type="password"
-              setter={setPassword}
+              setter={passwordSetter}
               isCorrect={password.isCorrect}
+              value={password.value}
             />
           </div>
           <div className="authorization__actions">
