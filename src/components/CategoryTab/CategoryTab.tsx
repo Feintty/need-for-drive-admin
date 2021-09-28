@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { fetchCategory } from "../../store/Category/CategoryActionCreators";
+import { selectCategory } from "../../store/selectors";
 import SpinLoader from "../Loader/Loader";
 import Snackbar from "../Snackbar/Snackbar";
 import Table from "../Table/Table";
@@ -10,7 +11,7 @@ import "./CategoryTab.scss";
 
 const CategoryTab = () => {
   const dispatch = useDispatch();
-  const { data } = useTypedSelector((state) => state.category);
+  const { data } = useTypedSelector(selectCategory);
 
   useEffect(() => {
     dispatch(fetchCategory());

@@ -8,7 +8,7 @@ import { snackbarOpen } from "../Snackbar/SnackbarActionCreators";
 import { basicHeader } from "../../Api/Headers";
 
 export const fetchCars = () => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch<CarsAction>) => {
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/car`,
       method: "GET",
@@ -34,7 +34,7 @@ export const fetchCars = () => {
               "cars",
               errorCodeToMessage(error.response.status.toString()),
               "error"
-            )
+            ) as any
           );
         }
       });
@@ -42,7 +42,7 @@ export const fetchCars = () => {
 };
 
 export const fetchCarsFiltered = (count: number, page: number) => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch<CarsAction>) => {
     dispatch({
       type: CarsActions.CARS_DROP_FILTERED_DATA,
     });
@@ -50,9 +50,7 @@ export const fetchCarsFiltered = (count: number, page: number) => {
     await axios({
       baseURL: `${process.env.REACT_APP_API_URL}/db/car?limit=${count}&page=${page}${filter}`,
       method: "GET",
-      headers: {
-        "X-Api-Factory-Application-Id": process.env.REACT_APP_APPLICATION_ID,
-      },
+      headers: basicHeader,
     })
       .then((response) => {
         dispatch({
@@ -74,7 +72,7 @@ export const fetchCarsFiltered = (count: number, page: number) => {
               "cars",
               errorCodeToMessage(error.response.status.toString()),
               "error"
-            )
+            ) as any
           );
         }
       });
