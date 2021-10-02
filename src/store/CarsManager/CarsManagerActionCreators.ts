@@ -16,6 +16,8 @@ const carsManagerDataToFormData = () => {
   formData.append("name", data.name);
   formData.append("description", data.description);
   formData.append("categoryId", data.categoryId.id);
+  formData.append("tank", data.tank.toString());
+  formData.append("number", data.number);
   data.colors.forEach((color) => formData.append("colors", color));
   if (data.thumbnail.file) {
     formData.append("thumbnail", data.thumbnail.file as File);

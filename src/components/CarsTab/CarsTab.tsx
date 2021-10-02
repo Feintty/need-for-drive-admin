@@ -17,15 +17,13 @@ import {
   selectCategory,
   selectPagesBar,
 } from "../../store/selectors";
-import { normalizeImgPath } from "../../utils/normalizeImgPath";
 import Filter from "../Filter/Filter";
-import SpinLoader from "../Loader/Loader";
 import PagesBar from "../PagesBar/PagesBar";
-import Table from "../Table/Table";
 import "./CarsTab.scss";
+import CarsTabDataTable from "./CarsTabDataTable";
 
 const CarsTab = () => {
-  const { dataFiltered, dataCount } = useTypedSelector(selectCars);
+  const { dataCount } = useTypedSelector(selectCars);
   const category = useTypedSelector(selectCategory);
   const dispatch = useDispatch();
   const { currentPage } = useTypedSelector(selectPagesBar);
@@ -96,36 +94,7 @@ const CarsTab = () => {
           </div>
         </div>
         <div className="cars-tab__cars">
-          {dataFiltered && dataFiltered.length > 0 ? (
-            <Table
-              data={dataFiltered?.map((el) => ({
-                Изображение: (
-                  <img
-                    alt="car"
-                    className="cars-tab__img"
-                    src={normalizeImgPath(el.thumbnail.path)}
-                  />
-                ),
-                Название: el.name,
-                "Цена (от)": el.priceMin,
-                "Цена (до)": el.priceMax,
-                Категория: el?.categoryId?.name || "Неизвестно",
-                Цвета: el.colors.toString() || "Отсутствуют",
-                "": (
-                  <Link to={`/admin/cars/edit/${el.id}`}>
-                    <button
-                      type="button"
-                      className="cars-tab__change button-change"
-                    >
-                      Изменить
-                    </button>
-                  </Link>
-                ),
-              }))}
-            />
-          ) : (
-            <SpinLoader />
-          )}
+          <CarsTabDataTable />
           <PagesBar />
         </div>
       </div>

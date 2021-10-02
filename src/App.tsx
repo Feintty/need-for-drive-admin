@@ -1,6 +1,6 @@
 import React from "react";
 import Snackbar from "./components/Snackbar/Snackbar";
-import Routes from "./Routes";
+import Routes from "./Routes/Routes";
 
 const App = () => {
   return (

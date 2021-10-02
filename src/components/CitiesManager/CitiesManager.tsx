@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -11,6 +10,7 @@ import {
 } from "../../store/CitiesManager/CitiesManagerActionCreators";
 import { selectCities, selectCitiesManager } from "../../store/selectors";
 import Input from "../Input/Input";
+import ManagerButtons from "../ManagerButtons/ManagerButtons";
 import "./CitiesManager.scss";
 
 const CitiesManager: React.FC = () => {
@@ -19,11 +19,6 @@ const CitiesManager: React.FC = () => {
   const dispatch = useDispatch();
   const { data } = useTypedSelector(selectCitiesManager);
   const citiesData = useTypedSelector(selectCities);
-
-  const saveButtonClass = classNames(
-    "cities-manager__button",
-    data.name ? "button-correct" : "button-disabled"
-  );
 
   useEffect(() => {
     if (id) {
@@ -70,25 +65,13 @@ const CitiesManager: React.FC = () => {
           isCorrect={true}
           value={data.name}
         />
-        <div className="cities-manager__buttons">
-          <button onClick={acceptClickHandler} className={saveButtonClass}>
-            Сохранить
-          </button>
-          <button
-            onClick={backClickHandler}
-            className="cities-manager__button button-default"
-          >
-            Отмена
-          </button>
-          {id && (
-            <button
-              onClick={deleteClickHandler}
-              className="cities-manager__button button-alert"
-            >
-              Удалить
-            </button>
-          )}
-        </div>
+        <ManagerButtons
+          acceptButtonToggle={!!data.name}
+          acceptButtonHandler={acceptClickHandler}
+          deleteButtonHandler={deleteClickHandler}
+          isDeleteButtonDisplay={!!id}
+          backButtonHandler={backClickHandler}
+        />
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -12,6 +11,7 @@ import {
 } from "../../store/CategoryManager/CategoryManagerActionCreators";
 import { selectCategory, selectCategoryManager } from "../../store/selectors";
 import Input from "../Input/Input";
+import ManagerButtons from "../ManagerButtons/ManagerButtons";
 import "./CategoryManager.scss";
 
 const CategoryManager: React.FC = () => {
@@ -23,11 +23,6 @@ const CategoryManager: React.FC = () => {
 
   const isCategoryManagerFieldsCompleted =
     categoryManager.data.description && categoryManager.data.name;
-
-  const saveButtonClass = classNames(
-    "category-manager__button",
-    isCategoryManagerFieldsCompleted ? "button-correct" : "button-disabled"
-  );
 
   useEffect(() => {
     if (id) {
@@ -92,25 +87,13 @@ const CategoryManager: React.FC = () => {
           isCorrect={true}
           value={categoryManager.data.description}
         />
-        <div className="category-manager__buttons">
-          <button onClick={acceptClickHandler} className={saveButtonClass}>
-            Сохранить
-          </button>
-          <button
-            onClick={backClickHandler}
-            className="category-manager__button button-default"
-          >
-            Отмена
-          </button>
-          {id && (
-            <button
-              onClick={deleteClickHandler}
-              className="category-manager__button button-alert"
-            >
-              Удалить
-            </button>
-          )}
-        </div>
+        <ManagerButtons
+          acceptButtonToggle={!!isCategoryManagerFieldsCompleted}
+          acceptButtonHandler={acceptClickHandler}
+          deleteButtonHandler={deleteClickHandler}
+          isDeleteButtonDisplay={!!id}
+          backButtonHandler={backClickHandler}
+        />
       </div>
     </div>
   );

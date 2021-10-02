@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { setCarsManagerData } from "../../store/CarsManager/CarsManagerActionCreators";
 import { selectCarsManager, selectCategory } from "../../store/selectors";
 import Filter from "../Filter/Filter";
 import Input from "../Input/Input";
+import CarsManagerColorsCreator from "./CarsManagerColorsCreator";
 
 const CarsManagerFields = () => {
   const { data } = useTypedSelector(selectCarsManager);
   const categoryData = useTypedSelector(selectCategory);
-  const [newColor, setNewColor] = useState("");
   const dispatch = useDispatch();
   const setCarsManagerName = (value: string) => {
     dispatch(setCarsManagerData({ name: value }));
@@ -48,36 +48,20 @@ const CarsManagerFields = () => {
     }
   };
 
-  const setCarsManagerNewColor = () => {
-    if (newColor !== "") {
-      dispatch(setCarsManagerData({ colors: [...data.colors, newColor] }));
-      setNewColor("");
+  const setCarsManagerTank = (value: string) => {
+    if (!isNaN(Number(value))) {
+      dispatch(
+        setCarsManagerData({
+          tank: Number(value),
+        })
+      );
     }
   };
 
-  const carsManagerRemoveColor = (value: string) => {
-    dispatch(
-      setCarsManagerData({ colors: data.colors.filter((el) => el !== value) })
-    );
+  const setCarsManagerNumber = (value: string) => {
+    dispatch(setCarsManagerData({ number: value }));
   };
 
-  const createColorCheckboxes = () => {
-    return data.colors.map((el) => (
-      <>
-        <input
-          checked={true}
-          type="checkbox"
-          className="checkbox-input"
-        ></input>
-        <span
-          onClick={() => carsManagerRemoveColor(el)}
-          className="checkbox-text"
-        >
-          {el}
-        </span>
-      </>
-    ));
-  };
   return (
     <div className="cars-manager__fields">
       <Input
@@ -110,25 +94,25 @@ const CarsManagerFields = () => {
         type="text"
         setter={setCarsManagerPriceMax}
         isCorrect={true}
-        value={data.priceMax.toString()}
+        value={data.priceMax?.toString()}
       />
-      <div className="cars-manager__colors-input">
-        <Input
-          description="Цвета"
-          placeholder="Введите цвет..."
-          type="text"
-          setter={setNewColor}
-          isCorrect={true}
-          value={newColor}
-        />
-        <button
-          className="cars-manager__colors-new"
-          onClick={setCarsManagerNewColor}
-        ></button>
-      </div>
-      {data.colors.length > 0 && (
-        <div className="cars-manager__colors">{createColorCheckboxes()}</div>
-      )}
+      <Input
+        description="Номер"
+        placeholder="Введите номер..."
+        type="text"
+        setter={setCarsManagerNumber}
+        isCorrect={true}
+        value={data.number}
+      />
+      <Input
+        description="Кол-во топлива"
+        placeholder="Введите кол-во топлива..."
+        type="text"
+        setter={setCarsManagerTank}
+        isCorrect={true}
+        value={data.tank?.toString()}
+      />
+      <CarsManagerColorsCreator />
     </div>
   );
 };

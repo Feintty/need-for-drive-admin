@@ -29,7 +29,7 @@ export const login = (mail: string, password: string) => {
             accessToken: response.data.access_token,
             refreshToken: response.data.refresh_token,
           },
-          { path: "/", maxAge: 9999999, secure: true }
+          { path: "/", maxAge: 86400, secure: true }
         );
         dispatch({
           type: UserActions.USER_LOGIN_SUCCES,

@@ -10,6 +10,8 @@ export interface ICarsManagerData {
     id: string;
     name: string;
   };
+  tank: number;
+  number: string;
   colors: Array<string>;
 }
 

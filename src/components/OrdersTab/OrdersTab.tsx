@@ -37,7 +37,6 @@ const OrdersTab: React.FC = () => {
 
   useEffect(() => {
     dispatch(setOrdersFilter(""));
-    dispatch(fetchOrders(countInPage, 0));
     dispatch(fetchCities());
     dispatch(fetchCars());
     dispatch(pagesBarSetCurrent(1));

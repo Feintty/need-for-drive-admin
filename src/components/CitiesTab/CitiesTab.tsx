@@ -19,7 +19,7 @@ const CitiesTab: React.FC = () => {
 
   return (
     <div className="cities-tab">
-      <div className="cities-tab__name">Категории</div>
+      <div className="cities-tab__name">Города</div>
       <div className="cities-tab__content">
         <div className="cities-tab__heading">
           <div className="cities-tab__buttons">

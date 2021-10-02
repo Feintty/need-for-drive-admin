@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -13,6 +12,7 @@ import {
 } from "../../store/CarsManager/CarsManagerActionCreators";
 import { selectCars, selectCarsManager } from "../../store/selectors";
 import CarsManagerCard from "../CarsManagerCard/CarsManagerCard";
+import ManagerButtons from "../ManagerButtons/ManagerButtons";
 import "./CarsManager.scss";
 import CarsManagerFields from "./CarsManagerFields";
 
@@ -29,11 +29,6 @@ const CarsManager = () => {
     data.colors.length > 0 &&
     !!data.categoryId.id &&
     (data.thumbnail.file !== null || data.thumbnail.path);
-
-  const saveButtonClass = classNames(
-    "cars-manager__button",
-    isCarsManagerFieldsCompleted ? "button-correct" : "button-disabled"
-  );
 
   useEffect(() => {
     dispatch(setCarsManagerDefault());
@@ -55,6 +50,8 @@ const CarsManager = () => {
             name: carById?.categoryId?.name,
           },
           colors: carById?.colors,
+          number: carById?.number,
+          tank: carById?.tank,
         })
       );
     } else {
@@ -88,25 +85,13 @@ const CarsManager = () => {
         <div className="cars-manager__settings">
           <h3 className="cars-manager__heading">Настройки автомобиля</h3>
           <CarsManagerFields />
-          <div className="cars-manager__buttons">
-            <button onClick={acceptClickHandler} className={saveButtonClass}>
-              Сохранить
-            </button>
-            <button
-              onClick={backClickHandler}
-              className="cars-manager__button button-default"
-            >
-              Отмена
-            </button>
-            {id && (
-              <button
-                onClick={deleteClickHandler}
-                className="cars-manager__button button-alert"
-              >
-                Удалить
-              </button>
-            )}
-          </div>
+          <ManagerButtons
+            acceptButtonToggle={!!isCarsManagerFieldsCompleted}
+            acceptButtonHandler={acceptClickHandler}
+            deleteButtonHandler={deleteClickHandler}
+            isDeleteButtonDisplay={!!id}
+            backButtonHandler={backClickHandler}
+          />
         </div>
       </div>
     </div>

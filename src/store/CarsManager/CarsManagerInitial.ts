@@ -17,6 +17,8 @@ export const CarsManagerInitial: ICarsManagerInitial = {
       name: "",
     },
     colors: [],
+    tank: 0,
+    number: "",
   },
   error: false,
 };
