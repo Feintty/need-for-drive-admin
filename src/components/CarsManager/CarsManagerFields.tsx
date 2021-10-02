@@ -66,10 +66,7 @@ const CarsManagerFields = () => {
     <div className="cars-manager__fields">
       <Input
         description="Модель"
-        placeholder="Введите название модели..."
-        type="text"
         setter={setCarsManagerName}
-        isCorrect={true}
         value={data.name}
       />
       {categoryData.data && (
@@ -83,33 +80,23 @@ const CarsManagerFields = () => {
       <Input
         description="Минимальная цена"
         placeholder="Введите минимальную цену..."
-        type="text"
         setter={setCarsManagerPriceMin}
-        isCorrect={true}
         value={data.priceMin.toString()}
       />
       <Input
         description="Максимальная цена"
         placeholder="Введите максимальную цену..."
-        type="text"
         setter={setCarsManagerPriceMax}
-        isCorrect={true}
         value={data.priceMax?.toString()}
       />
       <Input
         description="Номер"
-        placeholder="Введите номер..."
-        type="text"
         setter={setCarsManagerNumber}
-        isCorrect={true}
         value={data.number}
       />
       <Input
         description="Кол-во топлива"
-        placeholder="Введите кол-во топлива..."
-        type="text"
         setter={setCarsManagerTank}
-        isCorrect={true}
         value={data.tank?.toString()}
       />
       <CarsManagerColorsCreator />

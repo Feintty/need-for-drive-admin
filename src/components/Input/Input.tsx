@@ -5,18 +5,18 @@ import "./Input.scss";
 interface IInputProps {
   description?: string;
   placeholder?: string;
-  type: "text" | "password";
+  type?: "text" | "password";
   setter?: (arg0: string) => void;
-  isCorrect: boolean;
+  isCorrect?: boolean;
   value?: string;
 }
 
 const Input: React.FC<IInputProps> = ({
   description,
   placeholder,
-  type,
+  type = "text",
   setter,
-  isCorrect,
+  isCorrect = true,
   value = "",
 }) => {
   const inputClass = classNames("input-default__input", {
@@ -43,7 +43,11 @@ const Input: React.FC<IInputProps> = ({
         id={`input-${description}`}
         className={inputClass}
         type={type}
-        placeholder={placeholder}
+        placeholder={
+          placeholder
+            ? placeholder
+            : `Введите ${description?.toLocaleLowerCase()}`
+        }
         onChange={onInputChange}
         value={value && value}
       />
