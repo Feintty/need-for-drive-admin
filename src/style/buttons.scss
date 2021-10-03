@@ -55,11 +55,19 @@ button:hover {
   border-radius: 8px;
 }
 
+.button-correct {
+  @include button-props;
+  color: $white;
+  @include button-background($main-accent);
+  border-radius: 8px;
+}
+
 .button-disabled {
   @include button-props;
   color: $white;
   @include button-background($color-disabled);
   border-radius: 8px;
+  pointer-events: none;
 }
 
 .button-alert {
@@ -67,4 +75,32 @@ button:hover {
   color: $white;
   @include button-background($color-red);
   border-radius: 8px;
+}
+
+.button-change {
+  position: relative;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  border: 1px solid $main-bg;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 13px;
+  letter-spacing: -0.345714px;
+  padding: 6px 7px 6px 15px;
+  color:$color-button-text;
+  transition: 0.3s ease-in-out;
+
+  &:hover{
+    background: $gray-light;
+  }
+
+  &::before{
+    position:absolute;
+    left:7px;
+    content: '\2807';
+    font-size: 11px;
+    color:$color-button-text;
+  }
 }

@@ -1,10 +1,12 @@
 import React from "react";
-import AuthorizationPage from "./pages/AutorizationPage/AuthorizationPage";
+import Snackbar from "./components/Snackbar/Snackbar";
+import Routes from "./Routes/Routes";
 
 const App = () => {
   return (
     <div>
-      <AuthorizationPage />
+      <Snackbar snackbarId="snackbar-main" />
+      <Routes />
     </div>
   );
 };

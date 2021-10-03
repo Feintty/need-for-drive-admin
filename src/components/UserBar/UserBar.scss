@@ -1,0 +1,63 @@
+@import "../../style/local.scss";
+
+.user-bar {
+  position: relative;
+  width: 217px;
+  padding: 14px 22px 14px 26px;
+  border-left: 2px solid $main-bg;
+  @include flex-row;
+  align-items: center;
+  color: $text-color;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 17px;
+  letter-spacing: -0.471429px;
+  transition: 0.5s ease-in-out;
+
+  &__avatar {
+    border-radius: 50%;
+    margin-right: 13px;
+  }
+
+  &__dropdown {
+    margin-left: auto;
+  }
+
+  &:hover {
+    background: $color-sidebar-active;
+    .user-bar__exit {
+      display: flex;
+      animation: fadein 0.5s;
+    }
+  }
+
+  &__exit {
+    @include flex-row-center;
+    display: none;
+    left: 0;
+    height: 68px;
+    bottom: -68px;
+    position: absolute;
+    width: 215px;
+    background: white;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+    border:none;
+    border-top: 2px solid $main-bg;
+    margin:0;
+
+    &:hover {
+      background: $color-sidebar-active;
+    }
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

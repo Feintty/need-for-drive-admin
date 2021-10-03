@@ -1,0 +1,27 @@
+@import "../../style/local.scss";
+
+.footer {
+  @include flex-row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 68px;
+  padding: 26px 25px;
+  background: $white;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+
+  &__copyright {
+    font-style: normal;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 500;
+    color: $color-gray-alt;
+  }
+
+  &__link:first-child {
+    margin-right: 16px;
+  }
+}

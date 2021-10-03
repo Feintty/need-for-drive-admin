@@ -1,0 +1,111 @@
+@import "../../style/local.scss";
+
+.cars-manager {
+  &__name {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 29px;
+    line-height: 33px;
+    letter-spacing: -0.725px;
+    margin-bottom: 30px;
+    color: $text-color;
+  }
+
+  &__settings {
+    @include flex-column;
+    justify-content: space-between;
+    background: $white;
+    width: 100%;
+    box-shadow: 0px 2px 4px rgba(90, 97, 105, 0.12);
+    border-radius: 9px;
+    padding: 19px;
+    color: $text-color;
+  }
+
+  &__heading {
+    margin-bottom: 38px;
+  }
+
+  &__fields {
+    @include flex-row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+
+    & .cars-manager__colors-input {
+      @include flex-row;
+      .input-default {
+        width: 100%;
+        margin-bottom: 0;
+      }
+
+      .cars-manager__colors-new {
+        position: relative;
+        height: 31px;
+        min-width: 31px;
+        margin-top: auto;
+        border: 1px solid $gray-dark;
+        box-sizing: border-box;
+        border-radius: 4px;
+        margin-left: 8px;
+        background-color: $white;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+          background: $blue;
+        }
+        &::before {
+          position: absolute;
+          content: " ";
+          min-width: 16px;
+          min-height: 2px;
+          background: $gray-dark;
+          z-index: 2;
+          left: 7px;
+          top: 14px;
+        }
+        &::after {
+          position: absolute;
+          content: " ";
+          min-width: 2px;
+          min-height: 16px;
+          background: $gray-dark;
+          z-index: 2;
+          left: 14px;
+          top: 7px;
+        }
+      }
+    }
+
+    .dropdown-filter,
+    .input-default,
+    .cars-manager__colors-input {
+      width: 49%;
+      min-width: 200px;
+      margin-bottom: 22px;
+    }
+  }
+
+  &__colors {
+    @include flex-column;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 22px;
+  }
+
+  .checkbox-text {
+    margin-bottom: 8px;
+  }
+
+  &__content {
+    @include flex-row;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .cars-manager {
+   &__content{
+     @include flex-column;
+   }
+  }
+}

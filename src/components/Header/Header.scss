@@ -1,0 +1,45 @@
+@import "../../style/local.scss";
+
+.header {
+  position: relative;
+  @include flex-row;
+  height: 68px;
+  background: $white;
+
+  &__search,
+  &__search:focus {
+    border: none;
+    outline: none;
+    padding: 26px 51px;
+    flex-grow: 1;
+    width: 150px;
+  }
+
+  &__placeholder-icon {
+    position: absolute;
+    top: 27px;
+    left: 27px;
+  }
+
+  &__search::placeholder {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: -0.0928572px;
+  }
+  
+
+  &__user {
+    border-left: 2px solid $main-bg;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .header{
+    &__search, &__placeholder-icon{
+      display:none;
+    }
+    justify-content:right;
+  }
+}
