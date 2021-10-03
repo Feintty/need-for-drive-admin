@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import { useDispatchInputValueText } from "../../hooks/useDispatchInputValueText";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import {
   addCategoryData,
@@ -39,13 +40,15 @@ const CategoryManager: React.FC = () => {
     }
   }, []);
 
-  const setCategoryManagerName = (value: string) => {
-    dispatch(setCategoryManagerData({ name: value }));
-  };
+  const setCategoryManagerName = useDispatchInputValueText(
+    setCategoryManagerData,
+    "name"
+  );
 
-  const setCategoryManagerDescription = (value: string) => {
-    dispatch(setCategoryManagerData({ description: value }));
-  };
+  const setCategoryManagerDescription = useDispatchInputValueText(
+    setCategoryManagerData,
+    "description"
+  );
 
   const acceptClickHandler = () => {
     if (id) {

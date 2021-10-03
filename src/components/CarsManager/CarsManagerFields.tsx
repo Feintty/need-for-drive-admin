@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useDispatchInputValueNumber } from "../../hooks/useDispatchInputValueNumber";
+import { useDispatchInputValueText } from "../../hooks/useDispatchInputValueText";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { setCarsManagerData } from "../../store/CarsManager/CarsManagerActionCreators";
 import { selectCarsManager, selectCategory } from "../../store/selectors";
@@ -11,9 +13,26 @@ const CarsManagerFields = () => {
   const { data } = useTypedSelector(selectCarsManager);
   const categoryData = useTypedSelector(selectCategory);
   const dispatch = useDispatch();
-  const setCarsManagerName = (value: string) => {
-    dispatch(setCarsManagerData({ name: value }));
-  };
+  const setCarsManagerName = useDispatchInputValueText(
+    setCarsManagerData,
+    "name"
+  );
+  const setCarsManagerPriceMin = useDispatchInputValueNumber(
+    setCarsManagerData,
+    "priceMin"
+  );
+  const setCarsManagerPriceMax = useDispatchInputValueNumber(
+    setCarsManagerData,
+    "priceMax"
+  );
+  const setCarsManagerTank = useDispatchInputValueNumber(
+    setCarsManagerData,
+    "tank"
+  );
+  const setCarsManagerNumber = useDispatchInputValueText(
+    setCarsManagerData,
+    "number"
+  );
 
   const setCarsManagerCategoryId = (value: string) => {
     const categoryById =
@@ -27,41 +46,6 @@ const CarsManagerFields = () => {
       })
     );
   };
-
-  const setCarsManagerPriceMin = (value: string) => {
-    if (!isNaN(Number(value))) {
-      dispatch(
-        setCarsManagerData({
-          priceMin: Number(value),
-        })
-      );
-    }
-  };
-
-  const setCarsManagerPriceMax = (value: string) => {
-    if (!isNaN(Number(value))) {
-      dispatch(
-        setCarsManagerData({
-          priceMax: Number(value),
-        })
-      );
-    }
-  };
-
-  const setCarsManagerTank = (value: string) => {
-    if (!isNaN(Number(value))) {
-      dispatch(
-        setCarsManagerData({
-          tank: Number(value),
-        })
-      );
-    }
-  };
-
-  const setCarsManagerNumber = (value: string) => {
-    dispatch(setCarsManagerData({ number: value }));
-  };
-
   return (
     <div className="cars-manager__fields">
       <Input

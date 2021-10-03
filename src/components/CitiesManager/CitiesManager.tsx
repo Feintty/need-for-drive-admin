@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import { useDispatchInputValueText } from "../../hooks/useDispatchInputValueText";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import {
   addData,
@@ -29,9 +30,10 @@ const CitiesManager: React.FC = () => {
     }
   }, []);
 
-  const setCitiesManagerDataName = (name: string) => {
-    dispatch(setCitiesManagerData({ name: name }));
-  };
+  const setCitiesManagerDataName = useDispatchInputValueText(
+    setCitiesManagerData,
+    "name"
+  );
 
   const acceptClickHandler = () => {
     if (id) {

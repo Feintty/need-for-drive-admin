@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import { useDispatchInputValueNumber } from "../../hooks/useDispatchInputValueNumber";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import {
   deleteOrdersManagerData,
@@ -11,6 +12,7 @@ import {
 import { selectOrders, selectOrdersManager } from "../../store/selectors";
 import Input from "../Input/Input";
 import ManagerButtons from "../ManagerButtons/ManagerButtons";
+import OrderManagerCheckboxes from "./OrderManagerCheckboxes";
 import "./OrdersManager.scss";
 
 const OrdersManager: React.FC = () => {
@@ -34,25 +36,10 @@ const OrdersManager: React.FC = () => {
     );
   }, []);
 
-  const setOrdersManagerPrice = (value: string) => {
-    if (!isNaN(Number(value))) {
-      dispatch(setOrdersManagerData({ price: Number(value) }));
-    }
-  };
-
-  const setOrdersManagerIsFullTank = () => {
-    dispatch(setOrdersManagerData({ isFullTank: !data.isFullTank }));
-  };
-
-  const setOrdersManagerIsNeedChildChair = () => {
-    dispatch(
-      setOrdersManagerData({ isNeedChildChair: !data.isNeedChildChair })
-    );
-  };
-
-  const setOrdersManagerIsRightWheel = () => {
-    dispatch(setOrdersManagerData({ isRightWheel: !data.isRightWheel }));
-  };
+  const setOrdersManagerPrice = useDispatchInputValueNumber(
+    setOrdersManagerData,
+    "price"
+  );
 
   const acceptClickHandler = () => {
     dispatch(updateOrdersManagerData());
@@ -80,41 +67,7 @@ const OrdersManager: React.FC = () => {
           isCorrect={true}
           value={data.price.toString()}
         />
-        <div className="orders-manager__checkboxes">
-          <label
-            onChange={setOrdersManagerIsFullTank}
-            className="orders-manager__checkbox"
-          >
-            <input
-              checked={data.isFullTank}
-              type="checkbox"
-              className="checkbox-input"
-            ></input>
-            <span className="checkbox-text">Полный бак</span>
-          </label>
-          <label
-            onChange={setOrdersManagerIsNeedChildChair}
-            className="orders-manager__checkbox"
-          >
-            <input
-              checked={data.isNeedChildChair}
-              type="checkbox"
-              className="checkbox-input"
-            ></input>
-            <span className="checkbox-text">Детское кресло</span>
-          </label>
-          <label
-            onChange={setOrdersManagerIsRightWheel}
-            className="orders-manager__checkbox"
-          >
-            <input
-              checked={data.isRightWheel}
-              type="checkbox"
-              className="checkbox-input"
-            ></input>
-            <span className="checkbox-text">Правый руль</span>
-          </label>
-        </div>
+        <OrderManagerCheckboxes />
         <ManagerButtons
           acceptButtonToggle={!!isOrderManagerFieldsCompleted}
           acceptButtonHandler={acceptClickHandler}
